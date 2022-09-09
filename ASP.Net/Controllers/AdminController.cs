@@ -5,6 +5,13 @@ namespace OnlineShopWebApplication.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly IProductsRepository productRepository;
+
+        public AdminController(IProductsRepository productRepository)
+        {
+            this.productRepository = productRepository;
+        }
+
         public ActionResult Orders()
         {
             return View();
@@ -20,7 +27,8 @@ namespace OnlineShopWebApplication.Controllers
         }
         public ActionResult Products()
         {
-            return View();
+            var products = productRepository.GetAllMonitors();
+            return View(products);
         }
     }
 }
