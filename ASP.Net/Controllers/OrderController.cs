@@ -23,6 +23,11 @@ namespace OnlineShopWebApplication.Controllers
         [HttpPost]
         public IActionResult Buy(UserDeliveryInfo user)
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index", user);
+            }
+
             var exsistingCart = cartsRepository.TryGetByUserId(Constatns.UserId);
             var order = new Order
             {
