@@ -22,20 +22,6 @@ namespace OnlineShopWebApplication.Controllers
             return View(products);
         }
 
-        public IActionResult TvIndex()
-        {
-            var tvProducts = productRepository.GetAllTv();
-
-            return View(tvProducts);
-        }
-
-        public IActionResult PcIndex()
-        {
-            var pcProducts = productRepository.GetAllPc();
-
-            return View(pcProducts);
-        }
-
         public IActionResult Privacy()
         {
             return View();

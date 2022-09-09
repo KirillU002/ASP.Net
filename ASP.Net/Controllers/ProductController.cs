@@ -15,18 +15,6 @@ namespace OnlineShopWebApplication.Controllers
         {
             var product = productRepository.TryGetByIdMonitors(id);
             return View(product);
-        }  
-        
-        public IActionResult TvIndex(int id)
-        {
-            var tvProduct = productRepository.TryGetByIdTv(id);
-            return View(tvProduct);
-        }
-
-        public IActionResult PcIndex(int id)
-        {
-            var pcProduct = productRepository.TryGetByIdPc(id);
-            return View(pcProduct);
         }
     }    
 }
