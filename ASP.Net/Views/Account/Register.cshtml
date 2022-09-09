@@ -1,0 +1,29 @@
+﻿@model Register
+<form method="post">
+	<div class="container">
+<div>
+	<h3>Регистрация</h3> 
+	</div>
+
+<div class="row">
+	<div class="col-6">
+	<input class="form-control" type="text" name="username">
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-6">
+	<input class="form-control" type="password" name="password">
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-6">
+	<input class="form-control" type="password" name="confirmPassword">
+	</div>
+</div>
+
+<div>
+	<button class="btn btn-dark" type="submit" asp-controller="Account" asp-action="Register">Зарегистрироваться</button>
+</div></div>
+</form>

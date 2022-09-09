@@ -1,0 +1,48 @@
+﻿@model CartMonitor
+<div class="container">
+@if (Model == null || Model.Items.Count == 0)
+{
+	<img src="https://static.tildacdn.com/tild6333-3265-4966-b665-623064636633/kisspng-shopping-car.png" alt="<Корзина пустая>">
+}
+else
+{	<div class="row">
+		<div class="col">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Название</th>
+						<th>Цена руб</th>
+						<th>Количество</th>
+						<th>Стоимость руб</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbode>
+					@foreach (var item in Model.Items)
+					{
+						<tr>
+							<td>@item.Product.Name</td>
+							<td>@item.Product.Cost</td>
+							<td>@item.Amount</td>
+							<td>@item.CostMonitor</td>
+							<td>
+								<a class="btn btn-dark" href="/cart/addmonitor?productId=@item.Product.Id" role="button">+</a>
+								<a class="btn btn-dark" href="/cart/decreaseAmountmonitor?productId=@item.Product.Id" role="button">-</a>
+							</td>
+						</tr>
+					}
+				</tbode>
+			</table>
+			<div class="text-md-end">
+				<h5>Итог:</h5>
+				<h5>@Model.Cost</h5>
+			</div>
+			<div class="text-center">
+				<a class="btn btn-primary" href="/home/index" role="button">Продолжить покупки</a>
+				<a class="btn btn-success" href="/order/index" role="button">Оформить заказ</a>
+				<a class="btn btn-danger" href="/cart/clear" role="button">Очистить корзину</a>
+			</div>
+		</div>
+	</div>
+	
+}</div>
