@@ -14,7 +14,12 @@ namespace OnlineShopWebApplication.Controllers
         [HttpPost]
         public ActionResult Login(Login login)
         {
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+                return RedirectToAction("Login");
         }
 
         public ActionResult Register()
@@ -25,10 +30,17 @@ namespace OnlineShopWebApplication.Controllers
         [HttpPost]
         public ActionResult Register(Register register)
         {
-            bool passwordVerification = register.PasswordVerification();
-                if(!passwordVerification)
-                return RedirectToAction("Register", "Account");
-            return RedirectToAction("Index", "Home");
+            if(register.UserName == register.Password)
+            {
+                ModelState.AddModelError("", "Логин и пароль не должны совпадать");
+            }
+
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+                return RedirectToAction("Register");
         }
     }
 }

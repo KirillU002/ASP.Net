@@ -1,29 +1,37 @@
 ﻿@model Register
+
 <form method="post">
 	<div class="container">
 <div>
 	<h3>Регистрация</h3> 
 	</div>
 
-<div class="row">
-	<div class="col-6">
-	<input class="form-control" type="text" name="username">
-	</div>
-</div>
+		<div class="text-danger font-weight-bold" asp-validation-summary="ModelOnly"></div>
 
 <div class="row">
-	<div class="col-6">
-	<input class="form-control" type="password" name="password">
-	</div>
-</div>
+
+		<div class="col-6">
+			<label asp-for="UserName"></label><br />
+			<input class="form-control" asp-for="UserName" />
+			<span asp-validation-for="UserName" />
+		</div>
 
 <div class="row">
-	<div class="col-6">
-	<input class="form-control" type="password" name="confirmPassword">
-	</div>
+		<div class="col-6">
+			<label asp-for="Password"></label><br />
+			<input class="form-control" asp-for="Password" />
+			<span asp-validation-for="Password" />
+		</div>
+
+<div class="row">
+		<div class="col-6">
+			<label asp-for="ConfirmPassword"></label><br />
+			<input class="form-control" asp-for="ConfirmPassword" />
+			<span asp-validation-for="ConfirmPassword" />
+		</div>
 </div>
 
 <div>
 	<button class="btn btn-dark" type="submit" asp-controller="Account" asp-action="Register">Зарегистрироваться</button>
-</div></div>
+</div></div></div></div>
 </form>
