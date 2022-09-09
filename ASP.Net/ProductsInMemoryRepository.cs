@@ -15,6 +15,12 @@ namespace OnlineShopWebApplication
             new MonitorsProduct("Монитор MSI MPG341CQR", 34685, "34", "/images/image7.jpg", "3440x1440 (21:9)", "*VA", "4мс", "144 Гц", "чёрный", "MSI")
         };
 
+        public void Add(MonitorsProduct monitorsProduct)
+        {
+            monitorsProduct.ImagePath = "/images/image1.jpg";
+            monitorsProducts.Add(monitorsProduct);
+        }
+
         public List<MonitorsProduct> GetAllMonitors()
         {
             return monitorsProducts;
@@ -24,6 +30,27 @@ namespace OnlineShopWebApplication
         public MonitorsProduct TryGetByIdMonitors(int id)
         {
             return monitorsProducts.FirstOrDefault(product => product.Id == id);
+        }
+
+        public void Update(MonitorsProduct product)
+        {
+            var existingProduct = monitorsProducts.FirstOrDefault(x => x.Id == product.Id);
+
+            if(existingProduct == null)
+            {
+                return;
+            }
+
+            existingProduct.Name = product.Name;
+            existingProduct.Cost = product.Cost;
+            existingProduct.Diagonal = product.Diagonal;
+            //existingProduct.ImagePath = product.ImagePath;
+            existingProduct.ScreenResolution = product.ScreenResolution;
+            existingProduct.Matrix = product.Matrix;
+            existingProduct.Response = product.Response;
+            existingProduct.Hz = product.Hz;
+            existingProduct.Color = product.Color;
+            existingProduct.Company = product.Company;
         }
     }
 }
