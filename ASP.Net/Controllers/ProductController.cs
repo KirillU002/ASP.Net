@@ -13,7 +13,7 @@ namespace OnlineShopWebApplication.Controllers
         }
         public IActionResult Index(int id)
         {
-            var product = productRepository.TryGetByIdMonitors(id);
+            var product = productRepository.TryGetById(id);
             return View(product);
         }
     }    

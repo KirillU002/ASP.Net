@@ -4,8 +4,8 @@ namespace OnlineShopWebApplication
 {
     public interface ICartsRepository
     {
-        void AddMonitor(MonitorsProduct product, string userId);
-        CartMonitor TryGetByUserId(string userId);
+        void AddMonitor(Product product, string userId);
+        Cart TryGetByUserId(string userId);
         void DecreaseAmountMonitor(int productId, string userId);
         void Claer(string userId);
     }

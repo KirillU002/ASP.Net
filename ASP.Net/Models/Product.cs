@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApplication.Models
 {
-    public class MonitorsProduct
+    public class Product
     {
         private static int instanceCounter = 0;
         public int Id { get; set; }
@@ -35,13 +35,13 @@ namespace OnlineShopWebApplication.Models
 
         public string ImagePath { get; set; }
 
-        public MonitorsProduct()
+        public Product()
         {
             Id = instanceCounter;
             instanceCounter += 1;
         }
 
-        public MonitorsProduct(string name, decimal cost, string diagonal, string imagePath, string screenResolution, string matrix, string response, string hz, string color, string company) : this()
+        public Product(string name, decimal cost, string diagonal, string imagePath, string screenResolution, string matrix, string response, string hz, string color, string company) : this()
         {
             Name = name;
             Cost = cost;

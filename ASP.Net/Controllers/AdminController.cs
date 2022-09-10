@@ -7,15 +7,31 @@ namespace OnlineShopWebApplication.Controllers
     public class AdminController : Controller
     {
         private readonly IProductsRepository productRepository;
-
-        public AdminController(IProductsRepository productRepository)
+        private readonly IOrdersRepository ordersRepository;
+        private readonly IRolesRepository rolesRepository;
+        public AdminController(IProductsRepository productRepository, IOrdersRepository ordersRepository, IRolesRepository rolesRepository)
         {
             this.productRepository = productRepository;
+            this.ordersRepository = ordersRepository;
+            this.rolesRepository = rolesRepository;
         }
 
         public ActionResult Orders()
         {
-            return View();
+            var orders = ordersRepository.GetAll();
+            return View(orders);
+        }
+
+        public ActionResult OrderDetails(Guid orderId)
+        {
+            var order = ordersRepository.TryGetById(orderId);
+            return View(order);
+        }
+
+        public ActionResult UpdateOrderStatus(Guid orderId, OrderStatus status)
+        {
+            ordersRepository.UpdateStatus(orderId, status);
+            return RedirectToAction("Orders");
         }
 
         public ActionResult Users()
@@ -25,12 +41,38 @@ namespace OnlineShopWebApplication.Controllers
 
         public ActionResult Roles()
         {
+            var roles = rolesRepository.GetAll();
+            return View(roles);
+        }
+
+        public ActionResult RemoveRole(string roleName)
+        {
+            rolesRepository.Remove(roleName);
+            return RedirectToAction("Roles");
+        }
+
+        public ActionResult AddRole()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddRole(string name)
+        {
+            if (rolesRepository.TryGetByName(name) != null)
+            {
+                ModelState.AddModelError("", "Такая роль уже существует");
+            }
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Roles");
+            }
+            return View(name);
         }
 
         public ActionResult Products()
         {
-            var products = productRepository.GetAllMonitors();
+            var products = productRepository.GetAll();
             return View(products);
         }
 
@@ -45,7 +87,7 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddProduct(MonitorsProduct product)
+        public ActionResult AddProduct(Product product)
         {
             if (ModelState.IsValid)
             {
@@ -58,12 +100,12 @@ namespace OnlineShopWebApplication.Controllers
 
         public IActionResult EditProduct(int productId)
         {
-            var product = productRepository.TryGetByIdMonitors(productId);
+            var product = productRepository.TryGetById(productId);
             return View(product);
         }
 
         [HttpPost]
-        public ActionResult EditProduct(MonitorsProduct product)
+        public ActionResult EditProduct(Product product)
         {
             if (ModelState.IsValid)
             {

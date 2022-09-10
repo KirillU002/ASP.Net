@@ -5,24 +5,24 @@ namespace OnlineShopWebApplication
 {
     public class CartsInMemoryRepository : ICartsRepository
     {
-        private List<CartMonitor> carts = new List<CartMonitor>();
-        public CartMonitor TryGetByUserId(string userId)
+        private List<Cart> carts = new List<Cart>();
+        public Cart TryGetByUserId(string userId)
         {
             return carts.FirstOrDefault(x => x.UserId == userId);
         }
 
-        public void AddMonitor(MonitorsProduct product, string userId)
+        public void AddMonitor(Product product, string userId)
         {
             var existingCard = TryGetByUserId(userId);
             if (existingCard == null)
             {
-                var newCart = new CartMonitor
+                var newCart = new Cart
                 {
                     Id = Guid.NewGuid(),
                     UserId = userId,
-                    Items = new List<CartItemMonitor>
+                    Items = new List<CartItem>
                     {
-                        new CartItemMonitor
+                        new CartItem
                         {
                             Id = Guid.NewGuid(),
                             Amount = 1,
@@ -41,7 +41,7 @@ namespace OnlineShopWebApplication
                 }
                 else
                 {
-                    existingCard.Items.Add(new CartItemMonitor
+                    existingCard.Items.Add(new CartItem
                     {
                         Id = Guid.NewGuid(),
                         Amount = 1,

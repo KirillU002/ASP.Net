@@ -32,7 +32,7 @@ namespace OnlineShopWebApplication.Controllers
             var order = new Order
             {
                 User = user,
-                CartItemsMonitor = exsistingCart.Items,
+                CartItems = exsistingCart.Items,
             };
             ordersRepository.Add(order);
 

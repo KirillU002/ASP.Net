@@ -1,9 +1,9 @@
 ﻿namespace OnlineShopWebApplication.Models
 {
-    public class CartItemMonitor
+    public class CartItem
     {
         public Guid Id { get; set; }
-        public MonitorsProduct Product { get; set; }
+        public Product Product { get; set; }
         public int Amount { get; set; }//количество
         public decimal CostMonitor
         {

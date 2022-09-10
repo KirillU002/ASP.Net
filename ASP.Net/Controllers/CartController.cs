@@ -22,7 +22,7 @@ namespace OnlineShopWebApplication.Controllers
 
         public IActionResult AddMonitor(int productId)
         {
-            var product = productRepository.TryGetByIdMonitors(productId);
+            var product = productRepository.TryGetById(productId);
             cartsRepository.AddMonitor(product, Constatns.UserId);
 
             return RedirectToAction("Index");
