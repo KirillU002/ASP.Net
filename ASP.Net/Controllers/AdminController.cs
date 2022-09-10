@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ASP.Net.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication.Models;
 
@@ -57,17 +58,18 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddRole(string name)
+        public ActionResult AddRole(Role role)
         {
-            if (rolesRepository.TryGetByName(name) != null)
+            if (rolesRepository.TryGetByName(role.Name) != null)
             {
                 ModelState.AddModelError("", "Такая роль уже существует");
             }
             if (ModelState.IsValid)
             {
+                rolesRepository.Add(role);
                 return RedirectToAction("Roles");
             }
-            return View(name);
+            return View(role);
         }
 
         public ActionResult Products()
