@@ -1,6 +1,26 @@
 using OnlineShopWebApplication;
+using Serilog;
+
+// static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args).UseSerilog((hostingContext, LoggerConfiguration) =>
+//{
+//    LoggerConfiguration
+//    .ReadFrom.Configuration(hostingContext.Configuration)
+//    .Enrich.FromLogContext()
+//    .Enrich.WithProperty("ApplicationName", "Online Shop");
+//})
+//    .ConfigureWebHostDefaults(webBuilder =>
+//    {
+//        webBuilder.UseStartup<Program>();
+//    });
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog((hostingContext, LoggerConfiguration) =>
+{
+    LoggerConfiguration
+    .ReadFrom.Configuration(hostingContext.Configuration)
+    .Enrich.FromLogContext()
+    .Enrich.WithProperty("ApplicationName", "Online Shop");
+});
 
 builder.Services.AddSingleton<IOrdersRepository, OrdersInMemoryRepository>();
 builder.Services.AddSingleton<IProductsRepository, ProductsInMemoryRepository>();
@@ -11,6 +31,8 @@ builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 app.UseStaticFiles();
+
+app.UseSerilogRequestLogging();
 
 app.UseRouting();
 
