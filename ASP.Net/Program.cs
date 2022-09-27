@@ -1,18 +1,6 @@
 using OnlineShopWebApplication;
 using Serilog;
 
-// static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args).UseSerilog((hostingContext, LoggerConfiguration) =>
-//{
-//    LoggerConfiguration
-//    .ReadFrom.Configuration(hostingContext.Configuration)
-//    .Enrich.FromLogContext()
-//    .Enrich.WithProperty("ApplicationName", "Online Shop");
-//})
-//    .ConfigureWebHostDefaults(webBuilder =>
-//    {
-//        webBuilder.UseStartup<Program>();
-//    });
-
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((hostingContext, LoggerConfiguration) =>
 {
