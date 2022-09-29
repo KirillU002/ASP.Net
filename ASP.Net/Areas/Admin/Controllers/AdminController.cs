@@ -1,10 +1,12 @@
 ﻿using ASP.Net.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApplication;
 using OnlineShopWebApplication.Models;
 
-namespace OnlineShopWebApplication.Controllers
+namespace ASP.Net.Areas.Admin.Controllers
 {
+    [Area ("Admin")]
     public class AdminController : Controller
     {
         private readonly IProductsRepository productRepository;
