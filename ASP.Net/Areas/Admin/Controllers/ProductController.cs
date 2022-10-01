@@ -57,4 +57,10 @@ public class ProductController : Controller
         productRepository.Update(product);
         return RedirectToAction(nameof(Index));
     }
+
+    public IActionResult Remove(int productId)
+    {
+        productRepository.Remove(productId);
+        return View(nameof(Index));
+    }
 }

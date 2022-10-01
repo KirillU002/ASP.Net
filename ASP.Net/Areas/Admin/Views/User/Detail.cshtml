@@ -1,0 +1,61 @@
+﻿@model UserAccount
+
+<style>
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+</style>
+
+
+    <div class="row">
+        <div class="col-6">
+            <table class="table">
+                <tr>
+                    <td>Логин</td>
+                    <td>@Model.Name</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br>
+
+        <div class="dropdown">
+  <button class="dropbtn">Действия</button>
+  <div class="dropdown-content">
+    <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-id="@Model.Name">Смена пароля</a>
+        <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="EditUser" asp-route-id="@Model.Name">Редактирования данных</a>
+        <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="EditRights" asp-route-id="@Model.Name">Права доступа</a>
+        <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Delete" asp-route-id="@Model.Name">Удалить</a>
+  </div>
+</div>

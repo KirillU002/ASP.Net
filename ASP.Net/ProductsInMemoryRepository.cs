@@ -26,6 +26,11 @@ namespace OnlineShopWebApplication
             return products;
         }
 
+        public void Remove(int productId)
+        {
+            var product = products.FirstOrDefault(x => x.Id == productId);
+            products.Remove(product);
+        }
 
         public Product TryGetById(int id)
         {

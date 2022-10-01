@@ -47,7 +47,7 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(Register register)
+        public ActionResult Register(ChangePassword register)
         {
             if(register.UserName == register.Password)
             {

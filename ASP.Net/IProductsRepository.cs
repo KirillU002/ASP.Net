@@ -8,5 +8,6 @@ namespace OnlineShopWebApplication
         Product TryGetById(int id);
         void Add(Product monitorsProduct);
         void Update(Product product);
+        void Remove(int productId);
     }
 }
