@@ -1,4 +1,5 @@
-﻿using ASP.Net.Models;
+﻿using ASP.Net;
+using ASP.Net.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,13 @@ namespace OnlineShopWebApplication.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IUsersManager usersManager;
+
+        public AccountController(IUsersManager usersManager)
+        {
+            this.usersManager = usersManager;
+        }
+
         public ActionResult Login()
         {
             return View();
@@ -14,12 +22,23 @@ namespace OnlineShopWebApplication.Controllers
         [HttpPost]
         public ActionResult Login(Login login)
         {
-            if (ModelState.IsValid)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-                return RedirectToAction("Login");
+            if (!ModelState.IsValid)
+                return RedirectToAction(nameof(Login));
+
+              var userAccount = usersManager.TryGetByName(login.UserName);
+                if(userAccount == null)
+                {
+                    ModelState.AddModelError("", "Такого пользователя не существует");
+                    return RedirectToAction(nameof(Login));
+                }
+
+                if(userAccount.Password != login.Password)
+                {
+                    ModelState.AddModelError("", "Неправильный пароль");
+                    return RedirectToAction(nameof(Login));
+                }
+
+                    return RedirectToAction(nameof(HomeController.Index), nameof(HomeController));            
         }
 
         public ActionResult Register()
@@ -37,10 +56,15 @@ namespace OnlineShopWebApplication.Controllers
 
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Home");
+                usersManager.Add(new UserAccount
+                {
+                    Name = register.UserName,
+                    Password = register.Password
+                });
+                return RedirectToAction(nameof(HomeController.Index), "Home");
             }
             else
-                return RedirectToAction("Register");
+                return RedirectToAction(nameof(Register));
         }
     }
 }
