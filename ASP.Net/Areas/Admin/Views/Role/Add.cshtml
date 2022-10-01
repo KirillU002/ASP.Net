@@ -1,4 +1,4 @@
-﻿@using ASP.Net.Models
+﻿
 @model Role
 
 <form method="post">
@@ -12,11 +12,11 @@
 <div class="row">
 
 		<div class="col-6">
-			<label asp-for="Name"></label><br />
+			<label asp-for="Name">Название роли</label><br/>
 			<input class="form-control" asp-for="Name" />
 			<span asp-validation-for="Name" />
 		</div>
 <div>
-	<button class="btn btn-dark" type="submit" asp-controller="Admin" asp-action="AddRole">Создать</button>
-</div></div></div></div>
+	<button class="btn btn-dark" type="submit" asp-area="Admin" asp-controller="Role" asp-action="Add">Создать</button>
+</div></div></div>
 </form>

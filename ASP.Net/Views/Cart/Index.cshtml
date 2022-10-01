@@ -26,8 +26,8 @@ else
 							<td>@item.Amount</td>
 							<td>@item.CostMonitor</td>
 							<td>
-								<a class="btn btn-dark" href="/cart/addmonitor?productId=@item.Product.Id" role="button">+</a>
-								<a class="btn btn-dark" href="/cart/decreaseAmountmonitor?productId=@item.Product.Id" role="button">-</a>
+								<a class="btn btn-dark" href="/cart/add?productId=@item.Product.Id" role="button">+</a>
+								<a class="btn btn-dark" href="/cart/decreaseAmount?productId=@item.Product.Id" role="button">-</a>
 							</td>
 						</tr>
 					}

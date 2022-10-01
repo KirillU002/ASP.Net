@@ -1,4 +1,5 @@
-﻿@model List<Order>
+﻿@using ASP.Net.Models
+@model List<Order>
 
 <div class="row">
 @await Html.PartialAsync("AdminLeftMenu")
@@ -32,12 +33,15 @@
 							<td>@Model[i].CreatedDateTime.ToString("d")</td>
 							<td>@Model[i].CreatedDateTime.ToString("t")</td>
 							<td>
-								<a class="btn btn-dark" href="/admin/orderDetails?orderId=@Model[i].Id">Подробнее</a></td>
+								<a class="btn btn-dark" asp-area="Admin"
+								asp-controller="Order"
+								asp-action="orderDetails"
+								asp-route-orderId="@Model[i].Id">Подробнее</a></td>
 							
 						</tr>
 					}
 				</tbode>
 			</table>
-		</table>
 	</div>
+</div>
 </div>

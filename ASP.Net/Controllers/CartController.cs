@@ -20,17 +20,17 @@ namespace OnlineShopWebApplication.Controllers
             return View(cart);
         }
 
-        public IActionResult AddMonitor(int productId)
+        public IActionResult Add(int productId)
         {
             var product = productRepository.TryGetById(productId);
-            cartsRepository.AddMonitor(product, Constatns.UserId);
+            cartsRepository.Add(product, Constatns.UserId);
 
             return RedirectToAction("Index");
         }
 
-        public IActionResult DecreaseAmountMonitor(int productId)
+        public IActionResult DecreaseAmount(int productId)
         {
-            cartsRepository.DecreaseAmountMonitor(productId, Constatns.UserId);
+            cartsRepository.DecreaseAmount(productId, Constatns.UserId);
 
             return RedirectToAction("Index");
         }

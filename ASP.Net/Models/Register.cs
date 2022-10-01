@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnlineShopWebApplication.Models
+namespace ASP.Net.Models
 {
     public class Register
     {

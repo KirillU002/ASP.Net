@@ -1,4 +1,4 @@
-﻿using ASP.Net.Models;
+﻿using ASP.Net.Areas.Admin.Models;
 
 namespace OnlineShopWebApplication
 {

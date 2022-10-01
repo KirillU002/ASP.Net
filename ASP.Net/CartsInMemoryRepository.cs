@@ -11,7 +11,7 @@ namespace OnlineShopWebApplication
             return carts.FirstOrDefault(x => x.UserId == userId);
         }
 
-        public void AddMonitor(Product product, string userId)
+        public void Add(Product product, string userId)
         {
             var existingCard = TryGetByUserId(userId);
             if (existingCard == null)
@@ -51,7 +51,7 @@ namespace OnlineShopWebApplication
             }
         }
 
-        public void DecreaseAmountMonitor(int productId, string userId)
+        public void DecreaseAmount(int productId, string userId)
         {
             var existingCard = TryGetByUserId(userId);
 

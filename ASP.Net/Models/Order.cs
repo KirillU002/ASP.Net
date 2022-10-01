@@ -1,4 +1,6 @@
-﻿namespace OnlineShopWebApplication.Models
+﻿using OnlineShopWebApplication.Models;
+
+namespace ASP.Net.Models
 {
     public class Order
     {
@@ -10,7 +12,7 @@
 
         public Order()
         {
-            Id=Guid.NewGuid();
+            Id = Guid.NewGuid();
             Status = OrderStatus.Created;
             CreatedDateTime = DateTime.Now;
         }
