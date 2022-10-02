@@ -13,29 +13,29 @@ public class UserController : Controller
         this.usersManager = usersManager;
     }
 
-    public ActionResult Index()
+    public IActionResult Index()
     {
         var userAccount = usersManager.GetAll();
         return View(userAccount);
     }
 
-    public ActionResult Detail(string name)
+    public IActionResult Detail(string name)
     {
         var userAccount = usersManager.TryGetByName(name);
         return View(userAccount);
     }
 
-    public ActionResult ChangePassword(string name)
+    public IActionResult ChangePassword(string name)
     {        
         var changePassword = new ChangePassword()
         {
             UserName = name
         };
-        return View(name);
+        return View(changePassword);
     }
 
     [HttpPost]
-    public ActionResult ChangePassword(ChangePassword changePassword)
+    public IActionResult ChangePassword(ChangePassword changePassword)
     {
         if (changePassword.UserName == changePassword.Password)
         {
@@ -50,5 +50,28 @@ public class UserController : Controller
         }
         else
             return RedirectToAction(nameof(ChangePassword));
+    }
+    public IActionResult EditUser(string name)
+    {
+        var editUser = usersManager.TryGetByName(name);
+        return View(editUser);
+    }
+
+    [HttpPost]
+    public IActionResult EditUser(UserAccount user)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(user);
+        }
+
+        usersManager.Update(user);
+        return RedirectToAction(nameof(Index));
+    }
+
+    public IActionResult Delete(string name)
+    {
+        usersManager.Delete(name);
+        return RedirectToAction(nameof(Index));
     }
 }

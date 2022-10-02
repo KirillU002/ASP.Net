@@ -14,7 +14,7 @@
 					<tr>
 						<th>№</th>
 						<th>Логин</th>
-						<th></th>
+						<th>Номер телефона</th>
 						</tr>
 				</thead>
 				<tbode>
@@ -23,6 +23,7 @@
 						<tr>
 							<td>@(i+1)</td>
 							<td>@Model[i].Name</td>
+							<td>@Model[i].Phone</td>
 							<td>
 								<a class="btn btn-dark" asp-area="Admin"
 								asp-controller="User"

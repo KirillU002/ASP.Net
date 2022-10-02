@@ -8,5 +8,7 @@ namespace ASP.Net
         List<UserAccount> GetAll();
         UserAccount TryGetByName(string name);
         void ChangePassword(string userName, string newPassword);
+        void Update(UserAccount user);
+        void Delete(string name);
     }
 }

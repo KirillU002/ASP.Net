@@ -1,0 +1,38 @@
+﻿@model UserAccount
+
+<form method="post">
+	<div class="container">
+<div>
+        <h3>Редактирования данных</h3>
+	</div>
+
+		<div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
+		<input type="hidden" name="Id" value="@Model?.Name">
+<div class="row">
+
+		<div class="col-6">
+			<label asp-for="Name"></label><br />
+			<input class="form-control" asp-for="Name"  value="@Model?.Name"/>
+			<span asp-validation-for="Name" />
+		</div>
+
+<div class="row">
+		<div class="col-6">
+			<label asp-for="Phone"></label><br />
+			<input type = "number" class="form-control" asp-for="Phone" value="@Model?.Phone"/>
+			<span asp-validation-for="Phone" />
+		</div>
+
+<div class="row">
+		<div class="col-6">
+			<label asp-for="Password"></label><br />
+			<input class="form-control" asp-for="Password" value="@Model?.Password"/>
+			<span asp-validation-for="Password" />
+		</div>
+</div>
+
+<div>
+	<button class="btn btn-dark" type="submit" asp-area="Admin" asp-controller="User" asp-action="EditUser">Изменить</button>
+</div></div></div></div>
+</form>

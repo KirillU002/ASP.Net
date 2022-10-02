@@ -44,6 +44,8 @@
                 <tr>
                     <td>Логин</td>
                     <td>@Model.Name</td>
+                    <td>Телефон</td>
+                    <td>@Model.Phone</td>
                 </tr>
             </table>
         </div>
@@ -53,9 +55,8 @@
         <div class="dropdown">
   <button class="dropbtn">Действия</button>
   <div class="dropdown-content">
-    <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-id="@Model.Name">Смена пароля</a>
-        <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="EditUser" asp-route-id="@Model.Name">Редактирования данных</a>
-        <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="EditRights" asp-route-id="@Model.Name">Права доступа</a>
-        <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Delete" asp-route-id="@Model.Name">Удалить</a>
+    <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-name="@Model.Name">Смена пароля</a>
+        <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="EditUser" asp-route-name="@Model.Name">Редактирования данных</a>
+        <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Delete" asp-route-name="@Model.Name">Удалить</a>
   </div>
 </div>

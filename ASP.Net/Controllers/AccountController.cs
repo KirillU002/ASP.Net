@@ -47,7 +47,7 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(ChangePassword register)
+        public ActionResult Register(Register register)
         {
             if(register.UserName == register.Password)
             {
@@ -59,6 +59,7 @@ namespace OnlineShopWebApplication.Controllers
                 usersManager.Add(new UserAccount
                 {
                     Name = register.UserName,
+                    Phone = register.Phone,
                     Password = register.Password
                 });
                 return RedirectToAction(nameof(HomeController.Index), "Home");
