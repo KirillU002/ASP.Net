@@ -33,6 +33,8 @@ namespace OnlineShopWebApplication.Models
         [Required(ErrorMessage = "Не указан цвет")]
         public string Color { get; set; }
 
+        [Required(ErrorMessage = "Не указано описание")]
+        public string Description { get; set; }
         public string ImagePath { get; set; }
 
         public Product()
@@ -41,18 +43,20 @@ namespace OnlineShopWebApplication.Models
             instanceCounter += 1;
         }
 
-        public Product(string name, decimal cost, string diagonal, string imagePath, string screenResolution, string matrix, string response, string hz, string color, string company) : this()
+        public Product(string name, decimal cost, string diagonal, string imagePath, string screenResolution, string matrix, string response, string hz, string color, string company, string description) : this()
         {
             Name = name;
             Cost = cost;
-            Diagonal = diagonal;            
+            Diagonal = diagonal;
             ScreenResolution = screenResolution;
             Matrix = matrix;
             Response = response;
             Hz = hz;
             Color = color;
             Company = company;
-            ImagePath = imagePath;          
+            ImagePath = imagePath;
+            Description = description;
+            Description = description;
         }
 
         public override string ToString()

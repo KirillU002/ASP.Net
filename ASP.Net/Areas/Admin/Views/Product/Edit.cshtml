@@ -88,6 +88,14 @@
 		</div>
 </div>
 
+<div class="row">
+		<div class="col-6">
+			<label asp-for="Description"></label><br />
+			<input class="form-control" asp-for="Description" value="@Model?.Description"/>
+			<span asp-validation-for="Description"/>
+		</div>
+</div>
+
 <div>
 	<button class="btn btn-dark" type="submit" asp-area="Admin" asp-controller="Product" asp-action="Edit">Изменить</button>
 </div></div></div></div>
