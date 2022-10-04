@@ -12,8 +12,8 @@
 <div class="row">
 
 		<div class="col-6">
-			<label asp-for="Name"></label><br />
-			<input class="form-control" asp-for="Name"  value="@Model?.Name"/>
+			<label for="staticEmail" class="col-sm-2 col-form-label" asp-for="Name"></label><br />
+			<input type="text" readonly class="form-control-plaintext" id="staticEmail" asp-for="Name"  value="@Model?.Name"/>
 			<span asp-validation-for="Name" />
 		</div>
 
