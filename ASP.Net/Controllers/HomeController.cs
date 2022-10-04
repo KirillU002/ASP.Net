@@ -1,5 +1,6 @@
 ﻿using ASP.Net.Models;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
 
 namespace OnlineShopWebApplication.Controllers
 {
