@@ -20,7 +20,7 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
 
 builder.Services.AddSingleton<IOrdersRepository, OrdersInMemoryRepository>();
 builder.Services.AddTransient<IProductsRepository, ProductsDbRepository>();
-builder.Services.AddSingleton<ICartsRepository, CartsInMemoryRepository>();
+builder.Services.AddTransient<ICartsRepository, CartsDbRepository>();
 builder.Services.AddSingleton<IRolesRepository, RolesInMemoryRepository>();
 builder.Services.AddSingleton<IUsersManager, UsersManager>();
 builder.Services.AddControllersWithViews();

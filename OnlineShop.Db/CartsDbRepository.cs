@@ -1,36 +1,39 @@
 ﻿using OnlineShop.Db.Models;
-using System.Linq;
 
 namespace OnlineShop.Db
 {
-    public class CartsInMemoryRepository : ICartsRepository
+    public class CartsDbRepository : ICartsRepository
     {
-        private List<Cart> carts = new List<Cart>();
-        public Cart TryGetByUserId(string userId)
+        private DataBaseContext databaseContext;
+
+        public CartsDbRepository(DataBaseContext baseContext)
         {
-            return carts.FirstOrDefault(x => x.UserId == userId);
+            this.databaseContext = baseContext;
         }
 
-        public void Add(ProductViewModel product, string userId)
+        public Cart TryGetByUserId(string userId)
+        {
+            return databaseContext.Carts.FirstOrDefault(x => x.UserId == userId);
+        }
+
+        public void Add(Product product, string userId)
         {
             var existingCard = TryGetByUserId(userId);
             if (existingCard == null)
             {
                 var newCart = new Cart
                 {
-                    Id = Guid.NewGuid(),
                     UserId = userId,
                     Items = new List<CartItem>
                     {
                         new CartItem
                         {
-                            Id = Guid.NewGuid(),
                             Amount = 1,
                             Product = product
                         }
                     }
                 };
-                carts.Add(newCart);
+                databaseContext.Carts.Add(newCart);
             }
             else
             {
@@ -43,12 +46,12 @@ namespace OnlineShop.Db
                 {
                     existingCard.Items.Add(new CartItem
                     {
-                        Id = Guid.NewGuid(),
                         Amount = 1,
                         Product = product
                     });
                 }
             }
+            databaseContext.SaveChanges();
         }
 
         public void DecreaseAmount(Guid productId, string userId)
@@ -65,11 +68,14 @@ namespace OnlineShop.Db
             {
                 existingCard.Items.Remove(existingCardItem);
             }
+            databaseContext.SaveChanges();
         }
         public void Claer(string userId)
         {
             var existingCard = TryGetByUserId(userId);
-            carts.Remove(existingCard);
+            databaseContext.Carts.Remove(existingCard);
+
+            databaseContext.SaveChanges();
         }
     }
 }

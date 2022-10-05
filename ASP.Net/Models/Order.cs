@@ -6,7 +6,7 @@ namespace ASP.Net.Models
     {
         public Guid Id { get; set; }
         public UserDeliveryInfo User { get; set; }
-        public List<CartItem> CartItems { get; set; }
+        public List<CartItemViewModel> CartItems { get; set; }
         public OrderStatus Status { get; set; }
         public DateTime CreatedDateTime { get; set; }
 

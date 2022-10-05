@@ -1,11 +1,11 @@
 ﻿namespace OnlineShopWebApplication.Models
 {
-    public class Cart
+    public class CartViewModel
     {
 
         public Guid Id { get; set; }
         public string UserId { get; set; }
-        public List<CartItem> Items { get; set; }
+        public List<CartItemViewModel> Items { get; set; }
 
         public decimal Cost
         {
@@ -14,7 +14,7 @@
                 return Items?.Sum(x => x.CostMonitor) ?? 0;
             }
         }
-        public decimal AmountMonitor
+        public decimal Amount
         {
             get
             {

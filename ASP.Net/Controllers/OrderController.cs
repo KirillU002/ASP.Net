@@ -1,5 +1,7 @@
-﻿using ASP.Net.Models;
+﻿using ASP.Net.Helpers;
+using ASP.Net.Models;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Controllers
@@ -29,10 +31,13 @@ namespace OnlineShopWebApplication.Controllers
             }
 
             var exsistingCart = cartsRepository.TryGetByUserId(Constatns.UserId);
+
+            var exsistingCartViewModel = Mapping.ToCartViewModel(exsistingCart);
+
             var order = new Order
             {
                 User = user,
-                CartItems = exsistingCart.Items,
+                CartItems = exsistingCartViewModel.Items,
             };
             ordersRepository.Add(order);
 
