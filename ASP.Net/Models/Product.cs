@@ -2,10 +2,9 @@
 
 namespace OnlineShopWebApplication.Models
 {
-    public class Product
+    public class ProductViewModel
     {
-        private static int instanceCounter = 0;
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required(ErrorMessage = "Не указано имя")]
         public string Name { get; set; }
 
@@ -36,33 +35,5 @@ namespace OnlineShopWebApplication.Models
         [Required(ErrorMessage = "Не указано описание")]
         public string Description { get; set; }
         public string ImagePath { get; set; }
-
-        public Product()
-        {
-            Id = instanceCounter;
-            instanceCounter += 1;
-        }
-
-        public Product(string name, decimal cost, string diagonal, string imagePath, string screenResolution, string matrix, string response, string hz, string color, string company, string description) : this()
-        {
-            Name = name;
-            Cost = cost;
-            Diagonal = diagonal;
-            ScreenResolution = screenResolution;
-            Matrix = matrix;
-            Response = response;
-            Hz = hz;
-            Color = color;
-            Company = company;
-            ImagePath = imagePath;
-            Description = description;
-            Description = description;
-        }
-
-        public override string ToString()
-        {
-            return $"{Id}\n{Name}\n{Cost}";
-        }
-
     }
 }

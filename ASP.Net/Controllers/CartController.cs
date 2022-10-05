@@ -21,15 +21,15 @@ namespace OnlineShopWebApplication.Controllers
             return View(cart);
         }
 
-        public IActionResult Add(int productId)
+        public IActionResult Add(Guid productId)
         {
             var product = productRepository.TryGetById(productId);
-            cartsRepository.Add(product, Constatns.UserId);
+            //cartsRepository.Add(product, Constatns.UserId);
 
             return RedirectToAction("Index");
         }
 
-        public IActionResult DecreaseAmount(int productId)
+        public IActionResult DecreaseAmount(Guid productId)
         {
             cartsRepository.DecreaseAmount(productId, Constatns.UserId);
 

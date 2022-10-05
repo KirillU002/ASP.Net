@@ -1,7 +1,7 @@
-﻿using OnlineShopWebApplication.Models;
+﻿using OnlineShop.Db.Models;
 using System.Linq;
 
-namespace OnlineShopWebApplication
+namespace OnlineShop.Db
 {
     public class CartsInMemoryRepository : ICartsRepository
     {
@@ -61,7 +61,7 @@ namespace OnlineShopWebApplication
                 return;
             }
             existingCardItem.Amount -= 1;
-            if(existingCardItem.Amount == 0)
+            if (existingCardItem.Amount == 0)
             {
                 existingCard.Items.Remove(existingCardItem);
             }

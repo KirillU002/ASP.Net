@@ -19,13 +19,30 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("online_shop")));
 
 builder.Services.AddSingleton<IOrdersRepository, OrdersInMemoryRepository>();
-builder.Services.AddSingleton<IProductsRepository, ProductsDbRepository>();
+builder.Services.AddTransient<IProductsRepository, ProductsDbRepository>();
 builder.Services.AddSingleton<ICartsRepository, CartsInMemoryRepository>();
 builder.Services.AddSingleton<IRolesRepository, RolesInMemoryRepository>();
 builder.Services.AddSingleton<IUsersManager, UsersManager>();
 builder.Services.AddControllersWithViews();
 
+//using (var scope = IServiceScopeFactory.CreateScope()) // this will use `IServiceScopeFactory` internally
+//{
+//    var context = scope.ServiceProvider.GetService<DataBaseContext>();
+//}
+
+//builder.AddDbContextFactory<DataBaseContext>(options => options.UseSqlServer("online_shop"));
+
+//IDbContextFactory<DataBaseContext> myDbContextFactory;
+
+
 var app = builder.Build();
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+
+//    SeedData.Initialize(services);
+//}
 
 app.UseStaticFiles();
 

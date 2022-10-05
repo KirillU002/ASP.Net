@@ -5,9 +5,9 @@ namespace OnlineShop.Db
     public interface IProductsRepository
     {
         List<Product> GetAll();
-        Product TryGetById(int id);
+        Product TryGetById(Guid id);
         void Add(Product monitorsProduct);
         void Update(Product product);
-        void Remove(int productId);
+        void Remove(Guid productId);
     }
 }
