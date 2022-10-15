@@ -30,7 +30,7 @@ namespace OnlineShopWebApplication.Controllers
                 return RedirectToAction("Index", user);
             }
 
-            var exsistingCart = cartsRepository.TryGetByUserId(Constatns.UserId);
+            var exsistingCart = cartsRepository.TryGetByUserId(Constants.UserId);
 
             var exsistingCartViewModel = Mapping.ToCartViewModel(exsistingCart);
 
@@ -41,7 +41,7 @@ namespace OnlineShopWebApplication.Controllers
             };
             ordersRepository.Add(order);
 
-            cartsRepository.Claer(Constatns.UserId);
+            cartsRepository.Claer(Constants.UserId);
             return View();
         }
     }

@@ -16,7 +16,7 @@ namespace ASP.Net.Views.Shared.ViewComponents.CartViewComponents
 
         public IViewComponentResult Invoke()
         {
-            var cart = cartsRepository.TryGetByUserId(Constatns.UserId);
+            var cart = cartsRepository.TryGetByUserId(Constants.UserId);
 
             var cartViewModel = Mapping.ToCartViewModel(cart);
 

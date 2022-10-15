@@ -11,11 +11,11 @@ body {
 } 
 </style>*@
          @* <img src="/images/bg.jpg" class="background" />*@
-<div class="container-fluid">
+@*<div class="container-fluid">
     <div class="row">
         <div class="col-lg-4">
         <h4 class="my-4">МониТорг</h4>
-            @for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 1; i++)
             {
             <div class="card h-100 box-shadow">
             <a asp-controller="Product"><img class="card-img-top" src="@Model[i].ImagePath"></a>
@@ -30,7 +30,7 @@ body {
             </div>
         </div>
             }
-        </div>
+        </div>*@
         <div class="col-md-8">
 
                 <div id="carouselExampleIndicators" class="carousel slide my-3" data-ride="carousel">
@@ -63,11 +63,11 @@ body {
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
-        </div>
-    </div>
+       @* </div>
+    </div>*@
 
     <div class="row">
-        @for (int i = 1; i < Model.Count; i++)
+        @for (int i = 0; i < Model.Count; i++)
         {
                     <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100 box-shadow">
@@ -82,12 +82,15 @@ body {
             <div class="card-body d-flex align-items-end">
                 <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model[i].Id" class="btn btn-primary">В корзину</a>
             </div>
+                <div class="card-body d-flex align-items-end">
+                    <a asp-controller="Favorite" asp-action="Add" asp-route-id="@Model[i].Id" class="btn btn-success">Добавить избранное</a>
+                </div>
         </div>
                     </div>
         }
         </div>
-@*
-<div class="row">
+
+@*<div class="row">
 @foreach (var product in Model)
 {
     <div class="col-3">

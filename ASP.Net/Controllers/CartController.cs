@@ -17,7 +17,7 @@ namespace OnlineShopWebApplication.Controllers
 
         public IActionResult Index()
         {
-            var cart = cartsRepository.TryGetByUserId(Constatns.UserId);
+            var cart = cartsRepository.TryGetByUserId(Constants.UserId);
             return View(cart);
         }
 
@@ -31,14 +31,14 @@ namespace OnlineShopWebApplication.Controllers
 
         public IActionResult DecreaseAmount(Guid productId)
         {
-            cartsRepository.DecreaseAmount(productId, Constatns.UserId);
+            cartsRepository.DecreaseAmount(productId, Constants.UserId);
 
             return RedirectToAction("Index");
         }
 
         public IActionResult Clear()
         {
-            cartsRepository.Claer(Constatns.UserId);
+            cartsRepository.Claer(Constants.UserId);
             return RedirectToAction("Index");
         }
     }
