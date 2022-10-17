@@ -4,11 +4,11 @@ using OnlineShopWebApplication;
 
 namespace ASP.Net.Views.Shared.Components.CalcFavoriteProductsCount
 {
-    public class CalcFavoriteProductsCountViewModel : ViewComponent
+    public class CalcFavoriteProductsCountViewComponent : ViewComponent
     {
         private readonly IFavoriteRepository favoriteRepository;
 
-        public CalcFavoriteProductsCountViewModel(IFavoriteRepository favoriteRepository)
+        public CalcFavoriteProductsCountViewComponent(IFavoriteRepository favoriteRepository)
         {
             this.favoriteRepository = favoriteRepository;
         }

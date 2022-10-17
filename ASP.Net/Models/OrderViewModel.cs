@@ -2,18 +2,18 @@
 
 namespace ASP.Net.Models
 {
-    public class Order
+    public class OrderViewModel
     {
         public Guid Id { get; set; }
-        public UserDeliveryInfo User { get; set; }
+        public UserDeliveryInfoViewModel User { get; set; }
         public List<CartItemViewModel> CartItems { get; set; }
-        public OrderStatus Status { get; set; }
+        public OrderStatusViewModel Status { get; set; }
         public DateTime CreatedDateTime { get; set; }
 
-        public Order()
+        public OrderViewModel()
         {
             Id = Guid.NewGuid();
-            Status = OrderStatus.Created;
+            Status = OrderStatusViewModel.Created;
             CreatedDateTime = DateTime.Now;
         }
 

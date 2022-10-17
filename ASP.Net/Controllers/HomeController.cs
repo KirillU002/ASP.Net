@@ -1,6 +1,7 @@
 ﻿using ASP.Net.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
+using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Controllers
 {
@@ -15,7 +16,7 @@ namespace OnlineShopWebApplication.Controllers
         public IActionResult Index()
         {
             var products = productRepository.GetAll();
-            
+
             return View(Mapping.ToProductViewModels(products));
         }
     }

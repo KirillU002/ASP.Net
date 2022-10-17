@@ -5,24 +5,24 @@ namespace OnlineShopWebApplication
 {
     public class OrdersInMemoryRepository : IOrdersRepository
     {
-        private List<Order> orders = new List<Order>();
+        private List<OrderViewModel> orders = new List<OrderViewModel>();
 
-        public void Add(Order order)
+        public void Add(OrderViewModel order)
         {
             orders.Add(order);
         }
 
-        public List<Order> GetAll()
+        public List<OrderViewModel> GetAll()
         {
             return orders;
         }
 
-        public Order TryGetById(Guid id)
+        public OrderViewModel TryGetById(Guid id)
         {
             return orders.FirstOrDefault(x => x.Id == id);
         }
 
-        public void UpdateStatus(Guid orderId, OrderStatus newStatus)
+        public void UpdateStatus(Guid orderId, OrderStatusViewModel newStatus)
         {
             var order = TryGetById(orderId);
 

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ASP.Net.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 
@@ -15,7 +15,7 @@ namespace OnlineShopWebApplication.Controllers
         public IActionResult Index(Guid id)
         {
             var product = productRepository.TryGetById(id);
-            return View(product);
+            return View(Mapping.ToProductViewModel(product));
         }
     }    
 }

@@ -32,28 +32,14 @@ public class ProductController : Controller
     }
 
     [HttpPost]
-    public ActionResult Add(ProductViewModel product)
+    public IActionResult Add(ProductViewModel product)
     {
         if (ModelState.IsValid)
         {
             return View(product);
         }
 
-        var productDb = new Product
-        {
-            Name = product.Name,
-            Cost = product.Cost,
-            Hz = product.Hz,
-            Company = product.Company,
-            Description = product.Description,
-            Diagonal = product.Diagonal,
-            Matrix = product.Matrix,
-            Response = product.Response,
-            ScreenResolution = product.ScreenResolution,
-            Color = product.Color
-        };
-
-        productRepository.Add(productDb);
+        productRepository.Add(Mapping.ToProduct(product));
         return RedirectToAction(nameof(Index));
     }
 
@@ -64,28 +50,14 @@ public class ProductController : Controller
     }
 
     [HttpPost]
-    public ActionResult Edit(ProductViewModel product)
+    public IActionResult Edit(ProductViewModel product)
     {
         if (ModelState.IsValid)
         {
             return View(product);
         }
 
-        var productDb = new Product
-        {
-            Name = product.Name,
-            Cost = product.Cost,
-            Hz = product.Hz,
-            Company = product.Company,
-            Description = product.Description,
-            Diagonal = product.Diagonal,
-            Matrix = product.Matrix,
-            Response = product.Response,
-            ScreenResolution = product.ScreenResolution,
-            Color = product.Color
-        };
-
-        productRepository.Update(productDb);
+        productRepository.Update(Mapping.ToProduct(product));
         return RedirectToAction(nameof(Index));
     }
 

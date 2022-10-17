@@ -25,7 +25,7 @@ public class OrderController : Controller
         return View(order);
     }
 
-    public ActionResult UpdateOrderStatus(Guid orderId, OrderStatus status)
+    public ActionResult UpdateOrderStatus(Guid orderId, OrderStatusViewModel status)
     {
         ordersRepository.UpdateStatus(orderId, status);
         return RedirectToAction(nameof(Index));

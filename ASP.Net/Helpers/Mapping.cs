@@ -35,6 +35,25 @@ namespace ASP.Net.Helpers
             };
         }
 
+        public static Product ToProduct(ProductViewModel product)
+        {
+            return new Product
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Cost = product.Cost,
+                Color = product.Color,
+                Company = product.Company,
+                Description = product.Description,
+                Diagonal = product.Diagonal,
+                Hz = product.Hz,
+                ImagePath = product.ImagePath,
+                Matrix = product.Matrix,
+                Response = product.Response,
+                ScreenResolution = product.ScreenResolution
+            };
+        }
+
         public static CartViewModel ToCartViewModel(Cart cart)
         {
 

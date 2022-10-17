@@ -4,9 +4,9 @@ namespace OnlineShopWebApplication
 {
     public interface IOrdersRepository
     {
-        void Add(Order order);
-        List<Order> GetAll();
-        Order TryGetById(Guid id);
-        void UpdateStatus(Guid orderId, OrderStatus newStatus);
+        void Add(OrderViewModel order);
+        List<OrderViewModel> GetAll();
+        OrderViewModel TryGetById(Guid id);
+        void UpdateStatus(Guid orderId, OrderStatusViewModel newStatus);
     }
 }

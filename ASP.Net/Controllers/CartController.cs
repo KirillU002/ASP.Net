@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ASP.Net.Helpers;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 
@@ -18,28 +19,28 @@ namespace OnlineShopWebApplication.Controllers
         public IActionResult Index()
         {
             var cart = cartsRepository.TryGetByUserId(Constants.UserId);
-            return View(cart);
+            return View(Mapping.ToCartViewModel(cart));
         }
 
         public IActionResult Add(Guid productId)
         {
             var product = productRepository.TryGetById(productId);
-            //cartsRepository.Add(product, Constatns.UserId);
+            cartsRepository.Add(product, Constants.UserId);
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult DecreaseAmount(Guid productId)
         {
             cartsRepository.DecreaseAmount(productId, Constants.UserId);
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Clear()
         {
             cartsRepository.Claer(Constants.UserId);
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
     }
 }
