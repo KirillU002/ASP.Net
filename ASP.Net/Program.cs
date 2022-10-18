@@ -18,7 +18,7 @@ builder.Host.UseSerilog((hostingContext, LoggerConfiguration) =>
 builder.Services.AddDbContext<DataBaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("online_shop")));
 
-builder.Services.AddSingleton<IOrdersRepository, OrdersInMemoryRepository>();
+builder.Services.AddTransient<IOrdersDbRepository, OrdersDbRepository>();
 builder.Services.AddTransient<IProductsRepository, ProductsDbRepository>();
 builder.Services.AddTransient<ICartsRepository, CartsDbRepository>();
 builder.Services.AddTransient<IFavoriteRepository, FavoriteDbRepository>();

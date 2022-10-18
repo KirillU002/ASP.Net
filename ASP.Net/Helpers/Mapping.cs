@@ -1,4 +1,5 @@
-﻿using OnlineShop.Db.Models;
+﻿using ASP.Net.Models;
+using OnlineShop.Db.Models;
 using OnlineShopWebApplication.Models;
 
 namespace ASP.Net.Helpers
@@ -54,10 +55,42 @@ namespace ASP.Net.Helpers
             };
         }
 
+        public static OrderViewModel ToOrderViewModel(Order order)
+        {
+            return new OrderViewModel
+            {
+                Id = order.Id,
+                CreatedDateTime = order.CreatedDateTime,
+                Status = (OrderStatusViewModel)(int)order.Status,
+                User = ToUserDeliveryInfoViewModel(order.User),
+                CartItems = ToCartItemViewModels(order.Items)
+            };
+        }
+
+        public static UserDeliveryInfoViewModel ToUserDeliveryInfoViewModel(UserDeliveryInfo deliveryInfo)
+        {
+            return new UserDeliveryInfoViewModel
+            {
+                Name = deliveryInfo.Name,
+                Address = deliveryInfo.Address,
+                Phone = deliveryInfo.Phone
+            };
+        }
+
+        public static List<OrderViewModel> ToOrderViewModels(List<Order> orders)
+        {
+           var ordersViewModel = new List<OrderViewModel>();
+
+            foreach (var order in orders)
+            {
+                ordersViewModel.Add(ToOrderViewModel(order));
+            }
+            return ordersViewModel;
+        }
+
         public static CartViewModel ToCartViewModel(Cart cart)
         {
-
-            if(cart == null)
+            if (cart == null)
             {
                 return null;
             }
@@ -65,11 +98,11 @@ namespace ASP.Net.Helpers
             {
                 Id = cart.Id,
                 UserId = cart.UserId,
-                Items = ToCartItemViewModel(cart.Items)
+                Items = ToCartItemViewModels(cart.Items)
             };
         }
 
-        public static List<CartItemViewModel> ToCartItemViewModel(List<CartItem> cartDbItems)
+        public static List<CartItemViewModel> ToCartItemViewModels(List<CartItem> cartDbItems)
         {
             var cartItems = new List<CartItemViewModel>();
 
@@ -84,6 +117,14 @@ namespace ASP.Net.Helpers
                 cartItems.Add(cartItem);
             }
             return cartItems;
+        }
+
+        public static UserDeliveryInfo ToUser(UserDeliveryInfoViewModel user)
+        {
+            return new UserDeliveryInfo
+            {
+                Name = user.Name,
+            };
         }
     }
 }

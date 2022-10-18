@@ -2,6 +2,7 @@
 using ASP.Net.Models;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
+using OnlineShop.Db.Models;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Controllers
@@ -9,9 +10,9 @@ namespace OnlineShopWebApplication.Controllers
     public class OrderController : Controller
     {
         private readonly ICartsRepository cartsRepository;
-        private readonly IOrdersRepository ordersRepository;
+        private readonly IOrdersDbRepository ordersRepository;
 
-        public OrderController(ICartsRepository cartsRepository, IOrdersRepository ordersRepository)
+        public OrderController(ICartsRepository cartsRepository, IOrdersDbRepository ordersRepository)
         {
             this.cartsRepository = cartsRepository;
             this.ordersRepository = ordersRepository;
@@ -32,12 +33,12 @@ namespace OnlineShopWebApplication.Controllers
 
             var exsistingCart = cartsRepository.TryGetByUserId(Constants.UserId);
 
-            var exsistingCartViewModel = Mapping.ToCartViewModel(exsistingCart);
+            //var exsistingCartViewModel = Mapping.ToCartViewModel(exsistingCart);
 
-            var order = new OrderViewModel
+            var order = new Order
             {
-                User = user,
-                CartItems = exsistingCartViewModel.Items,
+                User = Mapping.ToUser(user),
+                Items = exsistingCart.Items,
             };
             ordersRepository.Add(order);
 

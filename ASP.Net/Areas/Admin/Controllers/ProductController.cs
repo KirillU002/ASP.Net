@@ -46,7 +46,7 @@ public class ProductController : Controller
     public IActionResult Edit(Guid productId)
     {
         var product = productRepository.TryGetById(productId);
-        return View(product);
+        return View(Mapping.ToProductViewModel(product));
     }
 
     [HttpPost]
