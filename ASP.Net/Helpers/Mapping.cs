@@ -6,18 +6,18 @@ namespace ASP.Net.Helpers
 {
     public static class Mapping
     {
-        public static List<ProductViewModel> ToProductViewModels(List<Product> products)
+        public static List<ProductViewModel> ToProductViewModels(this List<Product> products)
         {
             var productsViewModels = new List<ProductViewModel>();
 
             foreach (var product in products)
             {
-                productsViewModels.Add(ToProductViewModel(product));
+                productsViewModels.Add(product.ToProductViewModel());
             }
             return productsViewModels;
         }
 
-        public static ProductViewModel ToProductViewModel(Product product)
+        public static ProductViewModel ToProductViewModel(this Product product)
         {
             return new ProductViewModel
             {
@@ -36,7 +36,7 @@ namespace ASP.Net.Helpers
             };
         }
 
-        public static Product ToProduct(ProductViewModel product)
+        public static Product ToProduct(this ProductViewModel product)
         {
             return new Product
             {
@@ -55,19 +55,19 @@ namespace ASP.Net.Helpers
             };
         }
 
-        public static OrderViewModel ToOrderViewModel(Order order)
+        public static OrderViewModel ToOrderViewModel(this Order order)
         {
             return new OrderViewModel
             {
                 Id = order.Id,
                 CreatedDateTime = order.CreatedDateTime,
                 Status = (OrderStatusViewModel)(int)order.Status,
-                User = ToUserDeliveryInfoViewModel(order.User),
-                CartItems = ToCartItemViewModels(order.Items)
+                User = order.User.ToUserDeliveryInfoViewModel(),
+                CartItems = order.Items.ToCartItemViewModels()
             };
         }
 
-        public static UserDeliveryInfoViewModel ToUserDeliveryInfoViewModel(UserDeliveryInfo deliveryInfo)
+        public static UserDeliveryInfoViewModel ToUserDeliveryInfoViewModel(this UserDeliveryInfo deliveryInfo)
         {
             return new UserDeliveryInfoViewModel
             {
@@ -77,18 +77,7 @@ namespace ASP.Net.Helpers
             };
         }
 
-        public static List<OrderViewModel> ToOrderViewModels(List<Order> orders)
-        {
-           var ordersViewModel = new List<OrderViewModel>();
-
-            foreach (var order in orders)
-            {
-                ordersViewModel.Add(ToOrderViewModel(order));
-            }
-            return ordersViewModel;
-        }
-
-        public static CartViewModel ToCartViewModel(Cart cart)
+        public static CartViewModel ToCartViewModel(this Cart cart)
         {
             if (cart == null)
             {
@@ -98,11 +87,11 @@ namespace ASP.Net.Helpers
             {
                 Id = cart.Id,
                 UserId = cart.UserId,
-                Items = ToCartItemViewModels(cart.Items)
+                Items = cart.Items.ToCartItemViewModels()
             };
         }
 
-        public static List<CartItemViewModel> ToCartItemViewModels(List<CartItem> cartDbItems)
+        public static List<CartItemViewModel> ToCartItemViewModels(this List<CartItem> cartDbItems)
         {
             var cartItems = new List<CartItemViewModel>();
 
@@ -112,18 +101,20 @@ namespace ASP.Net.Helpers
                 {
                     Id = cartDbItem.Id,
                     Amount = cartDbItem.Amount,
-                    Product = ToProductViewModel(cartDbItem.Product)
+                    Product = cartDbItem.Product.ToProductViewModel()
                 };
                 cartItems.Add(cartItem);
             }
             return cartItems;
         }
 
-        public static UserDeliveryInfo ToUser(UserDeliveryInfoViewModel user)
+        public static UserDeliveryInfo ToUser(this UserDeliveryInfoViewModel user)
         {
             return new UserDeliveryInfo
             {
                 Name = user.Name,
+                Address = user.Address,
+                Phone = user.Phone,
             };
         }
     }

@@ -18,13 +18,13 @@ public class OrderController : Controller
     public ActionResult Index()
     {
         var orders = ordersRepository.GetAll();
-        return View(Mapping.ToOrderViewModels(orders));
+        return View(orders.Select(order => order.ToOrderViewModel()).ToList());
     }
 
     public ActionResult OrderDetails(Guid orderId)
     {
         var order = ordersRepository.TryGetById(orderId);
-        return View(Mapping.ToOrderViewModel(order));
+        return View(order.ToOrderViewModel());
     }
 
     public ActionResult UpdateOrderStatus(Guid orderId, OrderStatusViewModel status)

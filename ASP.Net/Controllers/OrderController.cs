@@ -24,20 +24,18 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Buy(UserDeliveryInfoViewModel user)
+        public IActionResult Buy(UserDeliveryInfoViewModel userViewModel)
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index), user);
+                return RedirectToAction(nameof(Index), userViewModel);
             }
 
             var exsistingCart = cartsRepository.TryGetByUserId(Constants.UserId);
 
-            //var exsistingCartViewModel = Mapping.ToCartViewModel(exsistingCart);
-
             var order = new Order
             {
-                User = Mapping.ToUser(user),
+                User = userViewModel.ToUser(),
                 Items = exsistingCart.Items,
             };
             ordersRepository.Add(order);

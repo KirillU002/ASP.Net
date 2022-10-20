@@ -18,7 +18,7 @@ namespace ASP.Net.Views.Shared.ViewComponents.CartViewComponents
         {
             var cart = cartsRepository.TryGetByUserId(Constants.UserId);
 
-            var cartViewModel = Mapping.ToCartViewModel(cart);
+            var cartViewModel = cart.ToCartViewModel();
 
             var productCounts = cartViewModel?.Amount ?? 0;
 

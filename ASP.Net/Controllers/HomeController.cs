@@ -17,7 +17,7 @@ namespace OnlineShopWebApplication.Controllers
         {
             var products = productRepository.GetAll();
 
-            return View(Mapping.ToProductViewModels(products));
+            return View(products.ToProductViewModels());
         }
     }
 }

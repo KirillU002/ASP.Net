@@ -18,7 +18,7 @@ public class ProductController : Controller
     {
         var products = productRepository.GetAll();
 
-        return View(Mapping.ToProductViewModels(products));
+        return View(products.ToProductViewModels());
     }
 
     public IActionResult Add()
@@ -39,14 +39,14 @@ public class ProductController : Controller
             return View(product);
         }
 
-        productRepository.Add(Mapping.ToProduct(product));
+        productRepository.Add(product.ToProduct());
         return RedirectToAction(nameof(Index));
     }
 
     public IActionResult Edit(Guid productId)
     {
         var product = productRepository.TryGetById(productId);
-        return View(Mapping.ToProductViewModel(product));
+        return View(product.ToProductViewModel());
     }
 
     [HttpPost]
@@ -57,7 +57,7 @@ public class ProductController : Controller
             return View(product);
         }
 
-        productRepository.Update(Mapping.ToProduct(product));
+        productRepository.Update(product.ToProduct());
         return RedirectToAction(nameof(Index));
     }
 

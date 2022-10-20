@@ -21,7 +21,7 @@ namespace ASP.Net.Controllers
         public ActionResult Index()
         {
             var products = favoriteRepository.GetAll(Constants.UserId);
-            return View(Mapping.ToProductViewModels(products));
+            return View(products.ToProductViewModels());
         }        
 
         public IActionResult Add(Guid productId)
