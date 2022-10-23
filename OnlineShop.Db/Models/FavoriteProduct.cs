@@ -1,6 +1,4 @@
-﻿using OnlineShop.Db.Models;
-
-namespace OnlineShop.Db
+﻿namespace OnlineShop.Db.Models
 {
     public class FavoriteProduct
     {

@@ -3,8 +3,6 @@ using OnlineShop.Db;
 using OnlineShopWebApplication;
 using Serilog;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((hostingContext, LoggerConfiguration) =>
@@ -24,6 +22,7 @@ builder.Services.AddTransient<ICartsRepository, CartsDbRepository>();
 builder.Services.AddTransient<IFavoriteRepository, FavoriteDbRepository>();
 builder.Services.AddSingleton<IRolesRepository, RolesInMemoryRepository>();
 builder.Services.AddSingleton<IUsersManager, UsersManager>();
+builder.Services.AddTransient<ICompareRepository, CompareDbRepository>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
