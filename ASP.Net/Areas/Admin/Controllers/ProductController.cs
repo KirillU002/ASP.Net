@@ -1,7 +1,6 @@
 ﻿using ASP.Net.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
-using OnlineShop.Db.Models;
 using OnlineShopWebApplication.Models;
 
 namespace ASP.Net.Areas.Admin.Controllers;
