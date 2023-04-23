@@ -10,14 +10,14 @@ namespace ASP.Net
             var adminEmail = "admin@bk.ru";
             var password = "password";
 
-            if (roleManager.FindByNameAsync(ConstantsDb.AdminRoleName).Result == null)
+            if (roleManager.FindByNameAsync(Constants.AdminRoleName).Result == null)
             {
-                roleManager.CreateAsync(new IdentityRole(ConstantsDb.AdminRoleName)).Wait();
+                roleManager.CreateAsync(new IdentityRole(Constants.AdminRoleName)).Wait();
             }
 
-            if (roleManager.FindByNameAsync(ConstantsDb.UserRoleName).Result == null)
+            if (roleManager.FindByNameAsync(Constants.UserRoleName).Result == null)
             {
-                roleManager.CreateAsync(new IdentityRole(ConstantsDb.UserRoleName)).Wait();
+                roleManager.CreateAsync(new IdentityRole(Constants.UserRoleName)).Wait();
             }
 
             if (userManager.FindByNameAsync(adminEmail).Result==null)
@@ -27,7 +27,7 @@ namespace ASP.Net
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(admin, ConstantsDb.AdminRoleName).Wait();
+                    userManager.AddToRoleAsync(admin, Constants.AdminRoleName).Wait();
                 }
             }
         }

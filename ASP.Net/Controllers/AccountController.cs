@@ -20,31 +20,29 @@ namespace OnlineShopWebApplication.Controllers
             _signInManager = signInManager;
         }
 
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl)
         {
-            return View();
+            return View(new Login() {ReturnUrl = returnUrl});
         }
 
         [HttpPost]
         public ActionResult Login(Login login)
         {
-            if (!ModelState.IsValid)
-                return RedirectToAction(nameof(Login));
+            if (ModelState.IsValid)
+            {
+                var result = _signInManager.PasswordSignInAsync(login.UserName, login.Password, login.RememberMe, false).Result;
 
-              var userAccount = usersManager.TryGetByName(login.UserName);
-                if(userAccount == null)
+                if (result.Succeeded)
                 {
-                    ModelState.AddModelError("", "Такого пользователя не существует");
-                    return RedirectToAction(nameof(Login));
+                    return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
-
-                if(userAccount.Password != login.Password)
+                else
                 {
                     ModelState.AddModelError("", "Неправильный пароль");
-                    return RedirectToAction(nameof(Login));
                 }
+            }
 
-                    return RedirectToAction(nameof(HomeController.Index), nameof(HomeController));            
+            return View(login);           
         }
 
         public ActionResult Register()

@@ -1,6 +1,6 @@
 ﻿namespace OnlineShop.Db
 {
-    public static class ConstantsDb
+    public static class Constants
     {
         public const string UserId = "UserId";
         public const string AdminRoleName = "Admin";

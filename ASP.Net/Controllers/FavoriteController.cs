@@ -1,4 +1,5 @@
 ﻿using ASP.Net.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
@@ -7,6 +8,7 @@ using System.Reflection.Metadata;
 
 namespace ASP.Net.Controllers
 {
+    [Authorize]
     public class FavoriteController : Controller
     {
         private readonly IFavoriteRepository favoriteRepository;

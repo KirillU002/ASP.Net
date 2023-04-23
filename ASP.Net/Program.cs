@@ -5,6 +5,7 @@ using Serilog;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using OnlineShop.Db.Models;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((hostingContext, LoggerConfiguration) =>
@@ -14,13 +15,27 @@ builder.Host.UseSerilog((hostingContext, LoggerConfiguration) =>
     .Enrich.FromLogContext()
     .Enrich.WithProperty("ApplicationName", "Online Shop");
 });
+
+string connection = builder.Configuration.GetConnectionString("online_shop");
+
 builder.Services.AddDbContext<IdentityContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("online_shop")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString(connection)));
 
 builder.Services.AddDbContext<DataBaseContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("online_shop")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString(connection)));
 
 builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.ExpireTimeSpan = TimeSpan.FromHours(8);
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.Cookie = new CookieBuilder
+    {
+        IsEssential = true,
+    };
+});
 
 builder.Services.AddTransient<IOrdersDbRepository, OrdersDbRepository>();
 builder.Services.AddTransient<IProductsRepository, ProductsDbRepository>();

@@ -1,10 +1,12 @@
 ﻿using ASP.Net.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 
 namespace OnlineShopWebApplication.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly IProductsRepository productRepository;

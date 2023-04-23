@@ -1,10 +1,12 @@
 ﻿using ASP.Net.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShopWebApplication;
 
 namespace ASP.Net.Controllers
 {
+    [Authorize]
     public class CompareController : Controller
     {
         private readonly ICompareRepository compareRepository;

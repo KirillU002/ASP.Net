@@ -12,5 +12,6 @@ namespace ASP.Net.Models
         [StringLength(30, MinimumLength = 6, ErrorMessage = "Пароль должен быть от 6 символов до 30")]
         public string Password { get; set; }
         public bool RememberMe { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }
