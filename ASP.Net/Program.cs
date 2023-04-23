@@ -3,6 +3,8 @@ using OnlineShop.Db;
 using OnlineShopWebApplication;
 using Serilog;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using OnlineShop.Db.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((hostingContext, LoggerConfiguration) =>
@@ -12,9 +14,13 @@ builder.Host.UseSerilog((hostingContext, LoggerConfiguration) =>
     .Enrich.FromLogContext()
     .Enrich.WithProperty("ApplicationName", "Online Shop");
 });
+builder.Services.AddDbContext<IdentityContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("online_shop")));
 
 builder.Services.AddDbContext<DataBaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("online_shop")));
+
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
 
 builder.Services.AddTransient<IOrdersDbRepository, OrdersDbRepository>();
 builder.Services.AddTransient<IProductsRepository, ProductsDbRepository>();
@@ -26,6 +32,10 @@ builder.Services.AddTransient<ICompareRepository, CompareDbRepository>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.UseStaticFiles();
 
