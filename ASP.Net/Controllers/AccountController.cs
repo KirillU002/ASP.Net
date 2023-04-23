@@ -34,7 +34,7 @@ namespace OnlineShopWebApplication.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                    return Redirect(login.ReturnUrl);
                 }
                 else
                 {
