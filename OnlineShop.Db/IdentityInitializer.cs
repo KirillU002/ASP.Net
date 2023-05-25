@@ -8,7 +8,7 @@ namespace ASP.Net
         public IdentityInitializer(UserManager<User> userManager, RoleManager<IdentityRole> roleManager) 
         {
             var adminEmail = "admin@bk.ru";
-            var password = "password";
+            var password = "Password12_";
 
             if (roleManager.FindByNameAsync(Constants.AdminRoleName).Result == null)
             {

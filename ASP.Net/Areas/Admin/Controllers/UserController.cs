@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Models;
 using ASP.Net.Helpers;
+using ASP.Net.Areas.Admin.Models;
 
 namespace ASP.Net.Areas.Admin.Controllers
 {
@@ -13,10 +14,12 @@ namespace ASP.Net.Areas.Admin.Controllers
     {
         //private readonly IUsersManager usersManager;
         private readonly UserManager<User> usersManager;
+        private readonly RoleManager<IdentityRole> rolesManager;
 
-        public UserController(UserManager<User> usersManager)
+        public UserController(UserManager<User> usersManager, RoleManager<IdentityRole> rolesManager)
         {
             this.usersManager = usersManager;
+            this.rolesManager = rolesManager;
         }
 
         public IActionResult Index()
@@ -95,5 +98,34 @@ namespace ASP.Net.Areas.Admin.Controllers
             usersManager.DeleteAsync(user).Wait();
             return RedirectToAction(nameof(Index));
         }
-    }
+
+        public IActionResult EditRights(string name)
+        {
+            var user = usersManager.FindByNameAsync(name).Result;
+            var userRoles = usersManager.GetRolesAsync(user).Result;
+            var roles = rolesManager.Roles.ToList();
+            var model = new EditRightsViewModel
+            {
+                UserName = user.UserName,
+                UserRoles = userRoles.Select(x => new RoleViewModel { Name = x }).ToList(),
+                AllRoles = roles.Select(x => new RoleViewModel { Name = x.Name }).ToList()
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditRights(string name, Dictionary<string, string> userRolesViewModel)
+        {
+            var userSelectedRoles = userRolesViewModel.Select(x => x.Key);
+
+			var user = usersManager.FindByNameAsync(name).Result;
+			var userRoles = usersManager.GetRolesAsync(user).Result;
+
+            usersManager.RemoveFromRolesAsync(user, userRoles).Wait();
+            usersManager.AddToRolesAsync(user, userSelectedRoles).Wait();
+
+			return Redirect($"/Admin/User/Detail?name={name}");
+        }
+
+	}
 }

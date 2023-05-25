@@ -3,6 +3,7 @@ using ASP.Net.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
 using OnlineShop.Db.Models;
 
 namespace OnlineShopWebApplication.Controllers
@@ -68,6 +69,8 @@ namespace OnlineShopWebApplication.Controllers
                 if (result.Succeeded)
                 {
                     _signInManager.SignInAsync(user, false).Wait();
+
+                    TryAssignUserRole(user);
                     return Redirect(register.ReturnUrl ?? "/Home");
                 }
                 else
@@ -96,6 +99,24 @@ namespace OnlineShopWebApplication.Controllers
             //}
             //else
             //    return RedirectToAction(nameof(Register));
+        }
+
+        private void TryAssignUserRole(User user)
+        {
+            try
+            {
+                _usersManager.AddToRoleAsync(user, Constants.UserRoleName).Wait();
+            }
+            catch
+            {
+                //log
+            }
+        }
+
+        public IActionResult Logout()
+        {
+            _signInManager.SignOutAsync().Wait();
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
     }
 }
