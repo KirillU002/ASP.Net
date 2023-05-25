@@ -2,7 +2,7 @@
 
 namespace ASP.Net.Areas.Admin.Models
 {
-    public class Role
+    public class RoleViewModel
     {
         [Required(ErrorMessage = "Пустое поле")]
         public string Name { get; set; }
