@@ -117,5 +117,14 @@ namespace ASP.Net.Helpers
                 Phone = user.Phone,
             };
         }
+
+        public static UserViewModel ToUserViewModel(this User user) 
+        {
+            return new UserViewModel
+            {
+                Name = user.UserName,
+                Phone = user.PhoneNumber
+            };
+        }
     }
 }

@@ -6,7 +6,7 @@ using OnlineShop.Db;
 
 namespace OnlineShopWebApplication.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class CartController : Controller
     {
         private readonly IProductsRepository productRepository;

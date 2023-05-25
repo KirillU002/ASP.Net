@@ -16,26 +16,24 @@ builder.Host.UseSerilog((hostingContext, LoggerConfiguration) =>
     .Enrich.WithProperty("ApplicationName", "Online Shop");
 });
 
-string connection = builder.Configuration.GetConnectionString("online_shop");
-
 builder.Services.AddDbContext<IdentityContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString(connection)));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("online_shop")));
 
 builder.Services.AddDbContext<DataBaseContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString(connection)));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("online_shop")));
 
 builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
 
-builder.Services.ConfigureApplicationCookie(options =>
-{
-    options.ExpireTimeSpan = TimeSpan.FromHours(8);
-    options.LoginPath = "/Account/Login";
-    options.LogoutPath = "/Account/Logout";
-    options.Cookie = new CookieBuilder
-    {
-        IsEssential = true,
-    };
-});
+//builder.Services.ConfigureApplicationCookie(options =>
+//{
+//    options.ExpireTimeSpan = TimeSpan.FromHours(8);
+//    options.LoginPath = "/Account/Login";
+//    options.LogoutPath = "/Account/Logout";
+//    options.Cookie = new CookieBuilder
+//    {
+//        IsEssential = true,
+//    };
+//});
 
 builder.Services.AddTransient<IOrdersDbRepository, OrdersDbRepository>();
 builder.Services.AddTransient<IProductsRepository, ProductsDbRepository>();

@@ -7,7 +7,7 @@ using OnlineShopWebApplication.Models;
 namespace ASP.Net.Areas.Admin.Controllers
 {
     [Area(OnlineShop.Db.Constants.AdminRoleName)]
-    [Authorize(Roles = OnlineShop.Db.Constants.AdminRoleName)]
+    //[Authorize(Roles = OnlineShop.Db.Constants.AdminRoleName)]
     public class ProductController : Controller
     {
         private readonly IProductsRepository productRepository;

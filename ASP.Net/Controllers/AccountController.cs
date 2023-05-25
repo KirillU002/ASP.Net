@@ -28,13 +28,13 @@ namespace OnlineShopWebApplication.Controllers
         [HttpPost]
         public ActionResult Login(Login login)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 var result = _signInManager.PasswordSignInAsync(login.UserName, login.Password, login.RememberMe, false).Result;
 
                 if (result.Succeeded)
                 {
-                    return Redirect(login.ReturnUrl);
+                    return Redirect(login.ReturnUrl ?? "/Home");
                 }
                 else
                 {
@@ -45,31 +45,57 @@ namespace OnlineShopWebApplication.Controllers
             return View(login);           
         }
 
-        public ActionResult Register()
+        public ActionResult Register(string returnUrl)
         {
-            return View();
+            return View(new Register() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
         public ActionResult Register(Register register)
         {
-            if(register.UserName == register.Password)
+            if (register.UserName == register.Password)
             {
                 ModelState.AddModelError("", "Логин и пароль не должны совпадать");
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                usersManager.Add(new UserAccount
+
+
+                User user = new User { Email = register.UserName, UserName = register.UserName, PhoneNumber = register.Phone };
+
+                var result = _usersManager.CreateAsync(user, register.Password).Result;
+                if (result.Succeeded)
                 {
-                    Name = register.UserName,
-                    Phone = register.Phone,
-                    Password = register.Password
-                });
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                    _signInManager.SignInAsync(user, false).Wait();
+                    return Redirect(register.ReturnUrl ?? "/Home");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
             }
-            else
-                return RedirectToAction(nameof(Register));
+            return View(register);
+            //if(register.UserName == register.Password)
+            //{
+            //    ModelState.AddModelError("", "Логин и пароль не должны совпадать");
+            //}
+
+            //if (ModelState.IsValid)
+            //{
+            //    usersManager.Add(new UserAccount
+            //    {
+            //        Name = register.UserName,
+            //        Phone = register.Phone,
+            //        Password = register.Password
+            //    });
+            //    return RedirectToAction(nameof(HomeController.Index), "Home");
+            //}
+            //else
+            //    return RedirectToAction(nameof(Register));
         }
     }
 }

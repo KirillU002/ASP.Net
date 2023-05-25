@@ -4,18 +4,18 @@ namespace ASP.Net
 {
     public class UsersManager : IUsersManager
     {
-        private readonly List<UserAccount> users = new List<UserAccount>();
+        private readonly List<UserViewModel> users = new List<UserViewModel>();
 
-        public List<UserAccount> GetAll()
+        public List<UserViewModel> GetAll()
         {
             return users;
         }
-        public void Add(UserAccount user)
+        public void Add(UserViewModel user)
         {
             users.Add(user);
         }
 
-        public UserAccount TryGetByName(string name)
+        public UserViewModel TryGetByName(string name)
         {
             return users.FirstOrDefault(x => x.Name == name);
         }
@@ -26,7 +26,7 @@ namespace ASP.Net
             account.Password = newPassword;
         }
 
-        public void Update(UserAccount user)
+        public void Update(UserViewModel user)
         {
             var existingUser = users.FirstOrDefault(x => x.Name == user.Name);
             if(existingUser == null)
