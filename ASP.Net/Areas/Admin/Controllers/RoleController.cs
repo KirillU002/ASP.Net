@@ -8,7 +8,7 @@ using System.Data;
 namespace ASP.Net.Areas.Admin.Controllers
 {
     [Area(OnlineShop.Db.Constants.AdminRoleName)]
-    //[Authorize(Roles = OnlineShop.Db.Constants.AdminRoleName)]
+    [Authorize(Roles = OnlineShop.Db.Constants.AdminRoleName)]
     public class RoleController : Controller
     {
         //private readonly IRolesRepository rolesRepository;

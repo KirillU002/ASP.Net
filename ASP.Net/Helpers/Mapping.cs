@@ -1,4 +1,5 @@
-﻿using ASP.Net.Models;
+﻿using ASP.Net.Areas.Admin.Models;
+using ASP.Net.Models;
 using OnlineShop.Db.Models;
 using OnlineShopWebApplication.Models;
 
@@ -28,34 +29,38 @@ namespace ASP.Net.Helpers
                 Company = product.Company,
                 Description = product.Description,
                 Diagonal = product.Diagonal,
-                Hz = product.Hz,
-                ImagePath = product.ImagePath,
+                Hz = product.Hz,    
                 Matrix = product.Matrix,
                 Response = product.Response,
-                ScreenResolution = product.ScreenResolution
+                ScreenResolution = product.ScreenResolution,
+                ImagesPaths = product.Images.Select(x => x.Url).ToArray()
             };
         }
 
-        public static Product ToProduct(this ProductViewModel product)
+        public static Product ToProduct(this AddProductViewModel addProductViewModel, List<string> imagesPaths)
         {
             return new Product
             {
-                Id = product.Id,
-                Name = product.Name,
-                Cost = product.Cost,
-                Color = product.Color,
-                Company = product.Company,
-                Description = product.Description,
-                Diagonal = product.Diagonal,
-                Hz = product.Hz,
-                ImagePath = product.ImagePath,
-                Matrix = product.Matrix,
-                Response = product.Response,
-                ScreenResolution = product.ScreenResolution
+                Name = addProductViewModel.Name,
+                Cost = addProductViewModel.Cost,
+                Color = addProductViewModel.Color,
+                Company = addProductViewModel.Company,
+                Description = addProductViewModel.Description,
+                Diagonal = addProductViewModel.Diagonal,
+                Hz = addProductViewModel.Hz,
+                Images = ToImages(imagesPaths),
+                Matrix = addProductViewModel.Matrix,
+                Response = addProductViewModel.Response,
+                ScreenResolution = addProductViewModel.ScreenResolution
             };
         }
 
-        public static OrderViewModel ToOrderViewModel(this Order order)
+		public static List<Image> ToImages(List<string> paths)
+		{
+            return paths.Select(x => new Image { Url = x }).ToList();
+		}
+
+		public static OrderViewModel ToOrderViewModel(this Order order)
         {
             return new OrderViewModel
             {

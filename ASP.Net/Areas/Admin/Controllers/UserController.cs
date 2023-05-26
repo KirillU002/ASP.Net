@@ -1,16 +1,17 @@
 ﻿using ASP.Net.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Models;
 using ASP.Net.Helpers;
 using ASP.Net.Areas.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace ASP.Net.Areas.Admin.Controllers
 {
-    [Area(OnlineShop.Db.Constants.AdminRoleName)]
-    //[Authorize(Roles = OnlineShop.Db.Constants.AdminRoleName)]
-    public class UserController : Controller
+	[Area(OnlineShop.Db.Constants.AdminRoleName)]
+	[Authorize(Roles = OnlineShop.Db.Constants.AdminRoleName)]
+	public class UserController : Controller
     {
         //private readonly IUsersManager usersManager;
         private readonly UserManager<User> usersManager;

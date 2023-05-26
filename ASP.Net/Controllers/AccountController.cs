@@ -10,13 +10,11 @@ namespace OnlineShopWebApplication.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUsersManager usersManager;
         private readonly UserManager<User> _usersManager;
         private readonly SignInManager<User> _signInManager;
 
-        public AccountController(IUsersManager usersManager, UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            this.usersManager = usersManager;
             _usersManager = userManager;
             _signInManager = signInManager;
         }

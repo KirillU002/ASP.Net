@@ -8,7 +8,8 @@ using System.Reflection.Metadata;
 
 namespace ASP.Net.Controllers
 {
-    public class FavoriteController : Controller
+	[Authorize]
+	public class FavoriteController : Controller
     {
         private readonly IFavoriteRepository favoriteRepository;
         private readonly IProductsRepository productsRepository;

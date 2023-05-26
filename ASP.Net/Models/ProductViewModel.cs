@@ -34,6 +34,7 @@ namespace OnlineShopWebApplication.Models
 
         [Required(ErrorMessage = "Не указано описание")]
         public string Description { get; set; }
-        public string ImagePath { get; set; }
+        public string [] ImagesPaths { get; set; }
+        public string ImagePath => ImagesPaths.Length == 0 ? "/images/Products/image3.png" : ImagesPaths[0];
     }
 }

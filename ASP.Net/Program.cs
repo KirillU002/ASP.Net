@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using OnlineShop.Db.Models;
 using Microsoft.Extensions.Configuration;
+using ASP.Net.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((hostingContext, LoggerConfiguration) =>
@@ -24,16 +25,16 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
 
 builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
 
-//builder.Services.ConfigureApplicationCookie(options =>
-//{
-//    options.ExpireTimeSpan = TimeSpan.FromHours(8);
-//    options.LoginPath = "/Account/Login";
-//    options.LogoutPath = "/Account/Logout";
-//    options.Cookie = new CookieBuilder
-//    {
-//        IsEssential = true,
-//    };
-//});
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.ExpireTimeSpan = TimeSpan.FromHours(8);
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.Cookie = new CookieBuilder
+    {
+        IsEssential = true,
+    };
+});
 
 builder.Services.AddTransient<IOrdersDbRepository, OrdersDbRepository>();
 builder.Services.AddTransient<IProductsRepository, ProductsDbRepository>();
@@ -42,19 +43,20 @@ builder.Services.AddTransient<IFavoriteRepository, FavoriteDbRepository>();
 builder.Services.AddSingleton<IRolesRepository, RolesInMemoryRepository>();
 builder.Services.AddSingleton<IUsersManager, UsersManager>();
 builder.Services.AddTransient<ICompareRepository, CompareDbRepository>();
+builder.Services.AddTransient<ImagesProvider>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-
-app.UseAuthentication();
-
-app.UseAuthorization();
 
 app.UseStaticFiles();
 
 app.UseSerilogRequestLogging();
 
 app.UseRouting();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "MyArea",
@@ -63,5 +65,7 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseEndpoints(endpoints =>  endpoints.MapControllers());
 
 app.Run();

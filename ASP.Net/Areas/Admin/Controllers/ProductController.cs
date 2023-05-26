@@ -1,4 +1,5 @@
-﻿using ASP.Net.Helpers;
+﻿using ASP.Net.Areas.Admin.Models;
+using ASP.Net.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
@@ -7,15 +8,18 @@ using OnlineShopWebApplication.Models;
 namespace ASP.Net.Areas.Admin.Controllers
 {
     [Area(OnlineShop.Db.Constants.AdminRoleName)]
-    //[Authorize(Roles = OnlineShop.Db.Constants.AdminRoleName)]
+    [Authorize(Roles = OnlineShop.Db.Constants.AdminRoleName)]
     public class ProductController : Controller
     {
         private readonly IProductsRepository productRepository;
-        public ProductController(IProductsRepository productRepository)
-        {
-            this.productRepository = productRepository;
-        }
-        public ActionResult Index()
+        private readonly ImagesProvider imagesProvider;
+
+		public ProductController(IProductsRepository productRepository, ImagesProvider imagesProvider)
+		{
+			this.productRepository = productRepository;
+			this.imagesProvider = imagesProvider;
+		}
+		public ActionResult Index()
         {
             var products = productRepository.GetAll();
 
@@ -27,20 +31,21 @@ namespace ASP.Net.Areas.Admin.Controllers
             return View();
         }
 
-        public IProductsRepository GetProductRepository()
-        {
-            return productRepository;
-        }
+        //public IProductsRepository GetProductRepository()
+        //{
+        //    return productRepository;
+        //}
 
         [HttpPost]
-        public IActionResult Add(ProductViewModel product)
+        public IActionResult Add(AddProductViewModel product)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(product);
             }
+            var imagesPaths = imagesProvider.SafeFiles(product.UploadedFiles, ImageFolders.Products);
 
-            productRepository.Add(product.ToProduct());
+            productRepository.Add(product.ToProduct(imagesPaths));
             return RedirectToAction(nameof(Index));
         }
 
@@ -58,7 +63,7 @@ namespace ASP.Net.Areas.Admin.Controllers
                 return View(product);
             }
 
-            productRepository.Update(product.ToProduct());
+            //productRepository.Update(product.ToProduct());
             return RedirectToAction(nameof(Index));
         }
 

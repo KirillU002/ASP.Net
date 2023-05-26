@@ -6,7 +6,8 @@ using OnlineShopWebApplication;
 
 namespace ASP.Net.Controllers
 {
-    public class CompareController : Controller
+	[Authorize]
+	public class CompareController : Controller
     {
         private readonly ICompareRepository compareRepository;
         private readonly IProductsRepository productsRepository;

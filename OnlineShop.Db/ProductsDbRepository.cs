@@ -1,4 +1,5 @@
-﻿using OnlineShop.Db.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShop.Db.Models;
 
 namespace OnlineShop.Db
 {
@@ -27,14 +28,14 @@ namespace OnlineShop.Db
 
         public void Add(Product monitorsProduct)
         {
-            monitorsProduct.ImagePath = "/images/image1.jpg";
+            //monitorsProduct.ImagePath = "/images/image1.jpg";
             dataBaseContext.Products.Add(monitorsProduct);
             dataBaseContext.SaveChanges();
         }
 
         public List<Product> GetAll()
         {
-            return dataBaseContext.Products.ToList();
+            return dataBaseContext.Products.Include(x => x.Images).ToList();
         }
 
         public void Remove(Guid productId)
