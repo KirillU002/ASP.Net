@@ -33,7 +33,7 @@ namespace ASP.Net.Helpers
                 Matrix = product.Matrix,
                 Response = product.Response,
                 ScreenResolution = product.ScreenResolution,
-                ImagesPaths = product.Images.Select(x => x.Url).ToArray()
+                ImagesPaths = product.Image.Select(x => x.Url).ToArray()
             };
         }
 
@@ -48,16 +48,59 @@ namespace ASP.Net.Helpers
                 Description = addProductViewModel.Description,
                 Diagonal = addProductViewModel.Diagonal,
                 Hz = addProductViewModel.Hz,
-                Images = ToImages(imagesPaths),
+                Image = ToImages(imagesPaths),
                 Matrix = addProductViewModel.Matrix,
                 Response = addProductViewModel.Response,
                 ScreenResolution = addProductViewModel.ScreenResolution
             };
         }
 
-		public static List<Image> ToImages(List<string> paths)
+		public static EditProductViewModel ToEditProductViewModel(this Product product)
+		{
+			return new EditProductViewModel
+			{
+                Id = product.Id,
+				Name = product.Name,
+				Cost = product.Cost,
+				Color = product.Color,
+				Company = product.Company,
+				Description = product.Description,
+				Diagonal = product.Diagonal,
+				Hz = product.Hz,
+				ImagePath = product.Image.ToPaths(),
+				Matrix = product.Matrix,
+				Response = product.Response,
+				ScreenResolution = product.ScreenResolution
+			};
+		}
+
+		public static Product ToProduct(this EditProductViewModel editProduct)
+		{
+			return new Product
+			{
+                Id = editProduct.Id,
+				Name = editProduct.Name,
+				Cost = editProduct.Cost,
+				Color = editProduct.Color,
+				Company = editProduct.Company,
+				Description = editProduct.Description,
+				Diagonal = editProduct.Diagonal,
+				Hz = editProduct.Hz,
+				Image = editProduct.ImagePath.ToImages(),
+				Matrix = editProduct.Matrix,
+				Response = editProduct.Response,
+				ScreenResolution = editProduct.ScreenResolution
+			};
+		}
+
+		public static List<Image> ToImages(this List<string> paths)
 		{
             return paths.Select(x => new Image { Url = x }).ToList();
+		}
+
+		public static List<string> ToPaths(this List<Image> paths)
+		{
+			return paths.Select(x => x.Url).ToList();
 		}
 
 		public static OrderViewModel ToOrderViewModel(this Order order)

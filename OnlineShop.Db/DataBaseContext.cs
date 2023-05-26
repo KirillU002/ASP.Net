@@ -10,6 +10,7 @@ namespace OnlineShop.Db
         public DbSet<FavoriteProduct> FavoriteProducts { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<CompareProduct> CompareProducts { get; set; }
+        public DbSet<Image> Image { get; set; }
 
         public DataBaseContext(DbContextOptions options) : base(options)
         {
@@ -18,7 +19,7 @@ namespace OnlineShop.Db
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Image>().HasOne(p => p.Product).WithMany(p => p.Images).HasForeignKey(p => p.ProductId).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Image>().HasOne(p => p.Product).WithMany(p => p.Image).HasForeignKey(p => p.ProductId).OnDelete(DeleteBehavior.Cascade);
 
             var product1Id = Guid.Parse("48240a82-9f6b-414c-97f4-f624813149b2");
             var product2Id = Guid.Parse("befe6b5b-7171-4446-b35c-5b265b81be17");

@@ -35,7 +35,8 @@ namespace OnlineShop.Db
 
         public List<Product> GetAll()
         {
-            return dataBaseContext.Products.Include(x => x.Images).ToList();
+			
+			return dataBaseContext.Products.Include(x => x.Image).ToList();
         }
 
         public void Remove(Guid productId)
@@ -47,12 +48,12 @@ namespace OnlineShop.Db
 
         public Product TryGetById(Guid id)
         {
-            return dataBaseContext.Products.FirstOrDefault(product => product.Id == id);
+			return dataBaseContext.Products.Include(x => x.Image).FirstOrDefault(product => product.Id == id);
         }
 
         public void Update(Product product)
         {
-            var existingProduct = dataBaseContext.Products.FirstOrDefault(x => x.Id == product.Id);
+            var existingProduct = dataBaseContext.Products.Include(x => x.Image).FirstOrDefault(x => x.Id == product.Id);
 
             if (existingProduct == null)
             {
@@ -62,7 +63,6 @@ namespace OnlineShop.Db
             existingProduct.Name = product.Name;
             existingProduct.Cost = product.Cost;
             existingProduct.Diagonal = product.Diagonal;
-            //existingProduct.ImagePath = product.ImagePath;
             existingProduct.ScreenResolution = product.ScreenResolution;
             existingProduct.Matrix = product.Matrix;
             existingProduct.Response = product.Response;
@@ -70,6 +70,12 @@ namespace OnlineShop.Db
             existingProduct.Color = product.Color;
             existingProduct.Company = product.Company;
             existingProduct.Description = product.Description;
+
+			foreach (var image in product.Image)
+            {
+                    image.ProductId = product.Id;
+					dataBaseContext.Image.Add(image);
+            }
 
             dataBaseContext.SaveChanges();
         }

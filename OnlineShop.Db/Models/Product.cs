@@ -16,12 +16,12 @@ namespace OnlineShop.Db.Models
         public string Color { get; set; }
         public string Description { get; set; }
         public List<CartItem> CartItems { get; set; }
-        public List<Image> Images { get; set; }
+        public List<Image> Image { get; set; }
 
 		public Product()
 		{
 			CartItems = new List<CartItem>();
-			Images = new List<Image>();
+			Image = new List<Image>();
 		}
 		public Product(Guid id, string name, decimal cost, string company, string diagonal, string screenResolution, string matrix, string response, string hz, string color, string description) : this()
 		{

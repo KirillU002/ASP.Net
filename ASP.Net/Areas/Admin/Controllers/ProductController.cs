@@ -31,10 +31,10 @@ namespace ASP.Net.Areas.Admin.Controllers
             return View();
         }
 
-        //public IProductsRepository GetProductRepository()
-        //{
-        //    return productRepository;
-        //}
+        public IProductsRepository GetProductRepository()
+        {
+            return productRepository;
+        }
 
         [HttpPost]
         public IActionResult Add(AddProductViewModel product)
@@ -52,18 +52,19 @@ namespace ASP.Net.Areas.Admin.Controllers
         public IActionResult Edit(Guid productId)
         {
             var product = productRepository.TryGetById(productId);
-            return View(product.ToProductViewModel());
+            return View(product.ToEditProductViewModel());
         }
 
         [HttpPost]
-        public IActionResult Edit(ProductViewModel product)
+        public IActionResult Edit(EditProductViewModel product)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(product);
             }
-
-            //productRepository.Update(product.ToProduct());
+			var addedImagesPaths = imagesProvider.SafeFiles(product.UploadedFiles, ImageFolders.Products);
+            product.ImagePath = addedImagesPaths;
+			productRepository.Update(product.ToProduct());
             return RedirectToAction(nameof(Index));
         }
 
