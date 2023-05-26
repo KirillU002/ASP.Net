@@ -1,0 +1,23 @@
+﻿@model User
+
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden" name="name" value="@Model.UserName">
+    <h3>Личный кабинет</h3>
+
+  <div style="padding:5px">
+    <div>
+        <h5>Ваш логин: @Model.UserName</h5>
+        <button class="btn btn-dark">Сменить логин</button>
+    </div>
+
+    <div>
+        <h5>Ваш номер телефона: @Model.PhoneNumber</h5>
+        <button class="btn btn-dark">Сменить номер</button>
+    </div>
+        <div style="padding:5px">
+    <div>
+        <button class="btn btn-dark">Сменить пароль</button>
+    </div>
+    </div>
+  </div>
+</form>

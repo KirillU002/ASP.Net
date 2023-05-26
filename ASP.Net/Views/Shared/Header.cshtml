@@ -27,7 +27,7 @@
                         @*</li>*@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Account" asp-action="Index">Личный кабинет</a>
+                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Account" asp-action="Index" asp-route-name="@User.Identity.Name">Личный кабинет</a>
                                 <a class="dropdown-item text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Выход</a>
                 </div>
                     </li>

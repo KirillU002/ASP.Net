@@ -10,13 +10,25 @@ namespace OnlineShopWebApplication.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<User> _usersManager;
-        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> usersManager;
+        private readonly SignInManager<User> signInManager;
 
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            _usersManager = userManager;
-            _signInManager = signInManager;
+            usersManager = userManager;
+            this.signInManager = signInManager;
+        }
+
+        public ActionResult Index(string name)
+        {
+            var userAccount = usersManager.FindByNameAsync(name).Result;
+            return View(userAccount);
+        }
+
+        [HttpPost]
+        public ActionResult Index()
+        {
+            return View();
         }
 
         public ActionResult Login(string returnUrl)
@@ -29,7 +41,7 @@ namespace OnlineShopWebApplication.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var result = _signInManager.PasswordSignInAsync(login.UserName, login.Password, login.RememberMe, false).Result;
+                var result = signInManager.PasswordSignInAsync(login.UserName, login.Password, login.RememberMe, false).Result;
 
                 if (result.Succeeded)
                 {
@@ -63,10 +75,10 @@ namespace OnlineShopWebApplication.Controllers
 
                 User user = new User { Email = register.UserName, UserName = register.UserName, PhoneNumber = register.Phone };
 
-                var result = _usersManager.CreateAsync(user, register.Password).Result;
+                var result = usersManager.CreateAsync(user, register.Password).Result;
                 if (result.Succeeded)
                 {
-                    _signInManager.SignInAsync(user, false).Wait();
+                    signInManager.SignInAsync(user, false).Wait();
 
                     TryAssignUserRole(user);
                     return Redirect(register.ReturnUrl ?? "/Home");
@@ -103,7 +115,7 @@ namespace OnlineShopWebApplication.Controllers
         {
             try
             {
-                _usersManager.AddToRoleAsync(user, Constants.UserRoleName).Wait();
+                usersManager.AddToRoleAsync(user, Constants.UserRoleName).Wait();
             }
             catch
             {
@@ -113,7 +125,7 @@ namespace OnlineShopWebApplication.Controllers
 
         public IActionResult Logout()
         {
-            _signInManager.SignOutAsync().Wait();
+            signInManager.SignOutAsync().Wait();
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
     }
