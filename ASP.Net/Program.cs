@@ -32,10 +32,11 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LogoutPath = "/Account/Logout";
     options.Cookie = new CookieBuilder
     {
-        IsEssential = true,
+        IsEssential = false,
     };
 });
 
+builder.Services.AddTransient<Service>();
 builder.Services.AddTransient<IOrdersDbRepository, OrdersDbRepository>();
 builder.Services.AddTransient<IProductsRepository, ProductsDbRepository>();
 builder.Services.AddTransient<ICartsRepository, CartsDbRepository>();

@@ -8,94 +8,72 @@
 
 		<div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
 
-<div class="row">
-
-		<div class="col-6">
-			<label asp-for="Name"></label><br />
+			<div class="input-group mb-3">
+				<span class="input-group-text" style="width: 270px">Введите название</span>
 			<input class="form-control" asp-for="Name" />
 			<span asp-validation-for="Name" />
 		</div>
-
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Cost"></label><br />
+				<div class="input-group mb-3">
+					<span class="input-group-text" style="width: 270px">Введите цену</span>
 			<input type = "number" class="form-control" asp-for="Cost"/>
 			<span asp-validation-for="Cost" />
-		</div>
-
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Diagonal"></label><br />
+			</div>
+					<div class="input-group mb-3">
+						<span class="input-group-text" style="width: 270px">Введите диагональ</span>
 			<input class="form-control" asp-for="Diagonal" />
 			<span asp-validation-for="Diagonal" />
 		</div>
-</div>
 
-<div class="row">
-		<div class="col-6">
-			<label asp-for="ScreenResolution"></label><br />
+					<div class="input-group mb-3">
+						<span class="input-group-text" style="width: 270px">Введите разрешение экрана</span>
 			<input class="form-control" asp-for="ScreenResolution" />
 			<span asp-validation-for="ScreenResolution"/>
 		</div>
-</div>
 
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Matrix"></label><br />
+					<div class="input-group mb-3">
+						<span class="input-group-text" style="width: 270px">Введите тип матрицы</span>
 			<input class="form-control" asp-for="Matrix" />
 			<span asp-validation-for="Matrix"/>
 		</div>
-</div>
 
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Response"></label><br />
+					<div class="input-group mb-3">
+						<span class="input-group-text" style="width: 270px">Введите время отклика</span>
 			<input class="form-control" asp-for="Response" />
 			<span asp-validation-for="Response"/>
 		</div>
-</div>
 
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Hz"></label><br />
+					<div class="input-group mb-3">
+						<span class="input-group-text" style="width: 270px">Введите Гц</span>
 			<input class="form-control" asp-for="Hz" />
 			<span asp-validation-for="Hz"/>
 		</div>
-</div>
 
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Color"></label><br />
+				<div class="input-group mb-3">
+					<span class="input-group-text" style="width: 270px">Введите цвет</span>
 			<input class="form-control" asp-for="Color" />
 			<span asp-validation-for="Color"/>
 		</div>
-</div>
 
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Company"></label><br />
+				<div class="input-group mb-3">
+					<span class="input-group-text" style="width: 270px">Введите название компании</span>
 			<input class="form-control" asp-for="Company" />
 			<span asp-validation-for="Company"/>
 		</div>
-</div>
 
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Description"></label><br />
+			<div class="input-group mb-3">
+				<span class="input-group-text" style="width: 270px">Введите описание</span>
 			<input class="form-control" asp-for="Description" value="@Model?.Description"/>
 			<span asp-validation-for="Description"/>
 		</div>
 </div>
 
-	<div class="row">
 				<div class="col-6">
 						<label asp-for="UploadedFiles">Загрузить новое изоображение></label>
 						<input type="file" name="UploadedFiles" multiple accept="image/*" class="form-control"/>
 						<span asp-validation-for="UploadedFiles" />
 				</div>
-	</div>
 
 <div>
 	<button class="btn btn-dark" type="submit" asp-area="Admin" asp-controller="Product" asp-action="Add">Создать</button>
-</div></div></div></div>
+</div>
 </form>

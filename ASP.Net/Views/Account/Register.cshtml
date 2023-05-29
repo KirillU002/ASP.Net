@@ -8,38 +8,30 @@
 
 		<div class="text-danger font-weight-bold" asp-validation-summary="ModelOnly"></div>
 		<input type="hidden" name="returnUrl" value="@Model.ReturnUrl">
-<div class="row">
 
-		<div class="col-6">
-			<label asp-for="UserName"></label><br />
+		<div class="input-group mb-3">
+			<span class="input-group-text" style="width: 270px">Введите email</span>
 			<input class="form-control" asp-for="UserName" />
 			<span asp-validation-for="UserName" />
-		</div>
+	</div>
 
-		<div class="row">
-
-		<div class="col-6">
-			<label asp-for="Phone"></label><br />
+			<div class="input-group mb-3">
+				<span class="input-group-text" style="width: 270px">Введите телефон</span>
 			<input class="form-control" asp-for="Phone" />
 			<span asp-validation-for="Phone" />
-		</div>
-
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Password"></label><br />
+	</div>
+				<div class="input-group mb-3">
+					<span class="input-group-text" style="width: 270px">Введите пароль</span>
 			<input class="form-control" asp-for="Password" />
 			<span asp-validation-for="Password" />
-		</div>
-
-<div class="row">
-		<div class="col-6">
-			<label asp-for="ConfirmPassword"></label><br />
+	</div>
+					<div class="input-group mb-3">
+						<span class="input-group-text" style="width: 270px">Повторите введеный пароль</span>
 			<input class="form-control" asp-for="ConfirmPassword" />
 			<span asp-validation-for="ConfirmPassword" />
 		</div>
-</div>
 
 <div>
 	<button class="btn btn-dark" type="submit" asp-controller="Account" asp-action="Register">Зарегистрироваться</button>
-</div></div></div></div>
+</div>
 </form>

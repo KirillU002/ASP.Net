@@ -9,84 +9,65 @@
 		<div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
 
 		<input type="hidden" name="Id" value="@Model?.Id">
-<div class="row">
 
-		<div class="col-6">
-			<label asp-for="Name"></label><br />
-			<input class="form-control" asp-for="Name"  value="@Model?.Name"/>
+		<div class="input-group mb-3">
+			<span class="input-group-text" style="width: 270px">Введите название</span>
+			<input class="form-control" asp-for="Name" />
 			<span asp-validation-for="Name" />
 		</div>
-
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Cost"></label><br />
-			<input type = "number" class="form-control" asp-for="Cost" value="@Model?.Cost"/>
+		<div class="input-group mb-3">
+			<span class="input-group-text" style="width: 270px">Введите цену</span>
+			<input type="number" class="form-control" asp-for="Cost" />
 			<span asp-validation-for="Cost" />
 		</div>
-
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Diagonal"></label><br />
-			<input class="form-control" asp-for="Diagonal" value="@Model?.Diagonal"/>
+		<div class="input-group mb-3">
+			<span class="input-group-text" style="width: 270px">Введите диагональ</span>
+			<input class="form-control" asp-for="Diagonal" />
 			<span asp-validation-for="Diagonal" />
 		</div>
-</div>
 
-<div class="row">
-		<div class="col-6">
-			<label asp-for="ScreenResolution"></label><br />
-			<input class="form-control" asp-for="ScreenResolution" value="@Model?.ScreenResolution"/>
-			<span asp-validation-for="ScreenResolution"/>
+		<div class="input-group mb-3">
+			<span class="input-group-text" style="width: 270px">Введите разрешение экрана</span>
+			<input class="form-control" asp-for="ScreenResolution" />
+			<span asp-validation-for="ScreenResolution" />
 		</div>
-</div>
 
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Matrix"></label><br />
-			<input class="form-control" asp-for="Matrix" value="@Model?.Matrix"/>
-			<span asp-validation-for="Matrix"/>
+		<div class="input-group mb-3">
+			<span class="input-group-text" style="width: 270px">Введите тип матрицы</span>
+			<input class="form-control" asp-for="Matrix" />
+			<span asp-validation-for="Matrix" />
 		</div>
-</div>
 
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Response"></label><br />
-			<input class="form-control" asp-for="Response" value="@Model?.Response"/>
-			<span asp-validation-for="Response"/>
+		<div class="input-group mb-3">
+			<span class="input-group-text" style="width: 270px">Введите время отклика</span>
+			<input class="form-control" asp-for="Response" />
+			<span asp-validation-for="Response" />
 		</div>
-</div>
 
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Hz"></label><br />
-			<input class="form-control" asp-for="Hz" value="@Model?.Hz"/>
-			<span asp-validation-for="Hz"/>
+		<div class="input-group mb-3">
+			<span class="input-group-text" style="width: 270px">Введите Гц</span>
+			<input class="form-control" asp-for="Hz" />
+			<span asp-validation-for="Hz" />
 		</div>
-</div>
 
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Color"></label><br />
-			<input class="form-control" asp-for="Color" value="@Model?.Color"/>
-			<span asp-validation-for="Color"/>
+		<div class="input-group mb-3">
+			<span class="input-group-text" style="width: 270px">Введите цвет</span>
+			<input class="form-control" asp-for="Color" />
+			<span asp-validation-for="Color" />
 		</div>
-</div>
 
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Company"></label><br />
-			<input class="form-control" asp-for="Company" value="@Model?.Company"/>
-			<span asp-validation-for="Company"/>
+		<div class="input-group mb-3">
+			<span class="input-group-text" style="width: 270px">Введите название компании</span>
+			<input class="form-control" asp-for="Company" />
+			<span asp-validation-for="Company" />
 		</div>
-</div>
 
-<div class="row">
-		<div class="col-6">
-			<label asp-for="Description"></label><br />
-			<input class="form-control" asp-for="Description" value="@Model?.Description"/>
-			<span asp-validation-for="Description"/>
+		<div class="input-group mb-3">
+			<span class="input-group-text" style="width: 270px">Введите описание</span>
+			<input class="form-control" asp-for="Description" value="@Model?.Description" />
+			<span asp-validation-for="Description" />
 		</div>
-</div>
+	</div>
 
 				<div class="row">
 					<div class="col-6">

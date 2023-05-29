@@ -8,25 +8,26 @@
 	<input type="hidden" name="ReturnUrl" value="@Model.ReturnUrl">
 	<div class="text-danger font-weight-bold" asp-validation-summary="ModelOnly"></div>
 
-	<div class="col-6">
-		<label asp-for="UserName"></label><br />
+		<div class="input-group mb-3">
+			<span class="input-group-text" style="width: 270px">Введите email</span>
 		<input class="form-control" asp-for="UserName" />
 		<span asp-validation-for="UserName" />
 	</div>
 
-	<div class="col-6">
-		<label asp-for="Password"></label><br />
+		<div class="input-group mb-3">
+			<span class="input-group-text" style="width: 270px">Введите пароль</span>
 		<input class="form-control" asp-for="Password" />
 		<span asp-validation-for="Password" />
 	</div>
 
-<div class="row">
-	<div class="col-6">
+			<div class="input-group mb-3">
+				<span class="input-group-text" style="width: 270px">Запомнить меня</span>
 	<input type="checkbox" name="rememberMe" value="true">
-	<a class="form-control" asp-area="" asp-controller="Account" asp-action="Register" asp-route-ReturnUrl="@Model.ReturnUrl">Регистрация нового пользователя</a>
-	</div>
-</div>
-
+	<br>
+		</div>
+				<div class="input-group mb-3">
+				<a class="btn btn-outline-success" asp-area="" asp-controller="Account" asp-action="Register" asp-route-ReturnUrl="@Model.ReturnUrl">Регистрация нового пользователя</a>
+				</div>
 <div>
 	<button class="btn btn-dark" type="submit" asp-controller="Account" asp-action="Login">Войти</button>
 </div></div>

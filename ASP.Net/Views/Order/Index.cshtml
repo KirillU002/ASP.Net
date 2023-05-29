@@ -1,53 +1,87 @@
 ﻿@model UserDeliveryInfoViewModel
 <form method="post">
 	<div class="container">
-		xmlns="http://www.w3.org/1999/xhtml"
 <div class="row text-center">
 	<div class="col">
 
 		<div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
 
-			<div>
-		<label asp-for="Name">Введите ФИО</label><br />
-		<input class="form-control" asp-for="Name" />
+				<div class="input-group mb-3">
+		<span class="input-group-text" style="width: 270px">Введите имя и фамилию</span>
+					<input class="form-control" asp-for="Name" />
 		<span asp-validation-for="Name" />
 		</div>
 
-			<div>
-		<label asp-for="Address">Введите адрес доставки</label><br />
-		<input class="form-control" asp-for="Address" />
+				<div class="input-group mb-3">
+					<span class="input-group-text" style="width: 270px">Введите адрес доставки</span>
+					<input class="form-control" id="suggest" asp-for="Address" />
 		<span asp-validation-for="Address" />
 		</div>
-
-			<div>
-		<label asp-for="Phone">Введите телефон</label><br />
-		<input class="form-control" asp-for="Phone" />
+		<div>
+				<input type="button" class="btn btn-outline-primary" value="Показать карту" id="toggle">
+				</div>
+				<br>
+				<div class="input-group mb-3">
+					<span class="input-group-text" style="width: 270px">Введите телефон</span>
+					<input class="form-control" asp-for="Phone" />
 		<span asp-validation-for="Phone" />
 		</div>
-
 		<br>
 		<button type="submit" class="btn btn-success" asp-controller="Order" asp-action="Buy">Оформить заказ</button>
 	</div>
 </div></div>
 </form>
 
-
-<head>
-	<title>Quick start. Placing an interactive map on a page</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script src="https://api-maps.yandex.ru/2.1/?apikey=Your API key&lang=en_US" type="text/javascript">
-	</script>
-	<script type="text/javascript">
-		ymaps.ready(init);
-		function init() {
-			var myMap = new ymaps.Map("map", {
-				center: [55.76, 37.64],
-				zoom: 7
-			});
-		}
-	</script>
-</head>
-
 <body>
-	<div id="map" style="width: 600px; height: 400px"></div>
+	<div id="map" style="width: 800px; height: 500px"></div>
 </body>
+
+<script type="text/javascript">
+	// Функция ymaps.ready() будет вызвана, когда
+	// загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+	ymaps.ready(init);
+	function init() {
+		// Создание карты.
+		var myMap;
+		var suggestView1 = new ymaps.SuggestView('suggest');
+
+		$('#toggle').bind
+		({
+			click:function(){
+				var searchControl = new ymaps.control.SearchControl({
+					options:{
+						noSelect:true
+					}
+				});
+				if(!myMap){
+					myMap = new ymaps.Map('map', {
+						center:[55.753559, 37.609218],
+						zoom:15
+					});
+					ymaps.geocode(document.getElementById("suggest").value,{
+						results:1
+					}).then(function(res){
+						var firstGeoObject = res.geoObjects.get(0),
+						coords = firstGeoObject.geometry.getCoordinates(),
+						bounds = firstGeoObject.properties.get('boundedBy');
+
+						firstGeoObject.options.set('preset', 'islands#darkBlueDotIconWithCaption');
+						firstGeoObject.properties.set('iconCaption', firstGeoObject.getAddressLine());
+
+						myMap.geoObjects.add(firstGeoObject);
+						myMap.setBounds(bounds, {
+							checkZoomRange: true
+						});
+					});
+
+					$("#toggle").attr('value', 'Скрыть карту');
+				}
+				else{
+					myMap.destroy();
+					myMap = null;
+					$("#toggle").attr('value', 'Показать карту');
+				}
+			}
+		});
+	}
+</script>

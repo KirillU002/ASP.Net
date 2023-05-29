@@ -1,4 +1,5 @@
 ﻿using ASP.Net;
+using ASP.Net.Helpers;
 using ASP.Net.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -12,23 +13,20 @@ namespace OnlineShopWebApplication.Controllers
     {
         private readonly UserManager<User> usersManager;
         private readonly SignInManager<User> signInManager;
-
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        private readonly ILogger<AccountController> logger;
+        private readonly Service service;
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ILogger<AccountController> logger, Service service)
         {
             usersManager = userManager;
             this.signInManager = signInManager;
+            this.logger = logger;
+            this.service = service;
         }
 
-        public ActionResult Index(string name)
+        public IActionResult Index(string name)
         {
             var userAccount = usersManager.FindByNameAsync(name).Result;
-            return View(userAccount);
-        }
-
-        [HttpPost]
-        public ActionResult Index()
-        {
-            return View();
+            return View(userAccount.ToUserViewModel());
         }
 
         public ActionResult Login(string returnUrl)
@@ -71,13 +69,12 @@ namespace OnlineShopWebApplication.Controllers
 
             if (!ModelState.IsValid)
             {
-
-
                 User user = new User { Email = register.UserName, UserName = register.UserName, PhoneNumber = register.Phone };
 
                 var result = usersManager.CreateAsync(user, register.Password).Result;
                 if (result.Succeeded)
                 {
+                    service.SendEmailDefault(user.Email);
                     signInManager.SignInAsync(user, false).Wait();
 
                     TryAssignUserRole(user);
@@ -92,23 +89,6 @@ namespace OnlineShopWebApplication.Controllers
                 }
             }
             return View(register);
-            //if(register.UserName == register.Password)
-            //{
-            //    ModelState.AddModelError("", "Логин и пароль не должны совпадать");
-            //}
-
-            //if (ModelState.IsValid)
-            //{
-            //    usersManager.Add(new UserAccount
-            //    {
-            //        Name = register.UserName,
-            //        Phone = register.Phone,
-            //        Password = register.Password
-            //    });
-            //    return RedirectToAction(nameof(HomeController.Index), "Home");
-            //}
-            //else
-            //    return RedirectToAction(nameof(Register));
         }
 
         private void TryAssignUserRole(User user)
@@ -128,5 +108,34 @@ namespace OnlineShopWebApplication.Controllers
             signInManager.SignOutAsync().Wait();
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
-    }
+
+		public ActionResult ChangePassword(string name)
+		{
+			var changePassword = new ChangePassword()
+			{
+				UserName = name
+			};
+			return View(changePassword);
+		}
+
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePassword changePassword)
+        {
+            if (changePassword.UserName == changePassword.Password)
+            {
+                ModelState.AddModelError("", "Логин и пароль не должны совпадать");
+            }
+
+            if (ModelState.IsValid)
+            {
+                var user = usersManager.FindByNameAsync(changePassword.UserName).Result;
+                var newHahPassword = usersManager.PasswordHasher.HashPassword(user, changePassword.Password);
+                user.PasswordHash = newHahPassword;
+
+                usersManager.UpdateAsync(user).Wait();
+                return RedirectToAction(nameof(HomeController.Index));
+            }
+			return RedirectToAction(nameof(ChangePassword));
+        }
+	}
 }

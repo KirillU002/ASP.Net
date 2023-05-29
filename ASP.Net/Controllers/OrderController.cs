@@ -8,7 +8,7 @@ using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Controllers
 {
-	[Authorize]
+	//[Authorize]
 	public class OrderController : Controller
     {
         private readonly ICartsRepository cartsRepository;

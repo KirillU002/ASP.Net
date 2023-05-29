@@ -1,4 +1,6 @@
 ﻿<header>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=e84db084-4694-4af0-a205-879829a9d321&lang=ru_RU" type="text/javascript">
+    </script>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
   <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">МониТорг</a>
@@ -15,9 +17,6 @@
              <a class="nav-link text-white" asp-area="" asp-controller="Cart" asp-action="Index">Корзина @await Component.InvokeAsync("Cart")</a>
            </li>
 
-@*           <li class="nav-item">
-              <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Login">Вход</a>
-           </li>*@
                     @if (User.Identity.IsAuthenticated)
                     {
                     <li class="nav-item dropdown">
@@ -27,7 +26,7 @@
                         @*</li>*@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Account" asp-action="Index" asp-route-name="@User.Identity.Name">Личный кабинет</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Account" asp-action="Index" asp-route-name="@User.Identity.Name">Личный кабинет</a>
                                 <a class="dropdown-item text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Выход</a>
                 </div>
                     </li>

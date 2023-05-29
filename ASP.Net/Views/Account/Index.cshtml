@@ -1,23 +1,29 @@
-﻿@model User
-
-<form method="post" enctype="multipart/form-data">
-    <input type="hidden" name="name" value="@Model.UserName">
+﻿@model UserViewModel
     <h3>Личный кабинет</h3>
 
   <div style="padding:5px">
-    <div>
-        <h5>Ваш логин: @Model.UserName</h5>
-        <button class="btn btn-dark">Сменить логин</button>
-    </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" style="width: 270px">Ваш email: </span>
+            <input class="form-control" asp-for="Name" />
+            <span asp-validation-for="Name" />
+        </div>
+
+        <div>
+            <a class="btn btn btn-toolbar" href="#">Сменить логин</a>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" style="width: 270px">Ваш номер телефона: </span>
+            <input class="form-control" asp-for="Phone" />
+            <span asp-validation-for="Phone" />
+        </div>
+
+        <div>
+            <a class="btn btn-toolbar" href="#">Сменить номер</a>
+        </div>
 
     <div>
-        <h5>Ваш номер телефона: @Model.PhoneNumber</h5>
-        <button class="btn btn-dark">Сменить номер</button>
-    </div>
-        <div style="padding:5px">
-    <div>
-        <button class="btn btn-dark">Сменить пароль</button>
-    </div>
+        <a class="btn btn-toolbar" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-name="@Model.Name">Сменить пароль</a>
     </div>
   </div>
-</form>
