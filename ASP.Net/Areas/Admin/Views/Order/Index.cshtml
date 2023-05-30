@@ -28,7 +28,7 @@
 							<td>@(i+1)</td>
 							<td>@Model[i].Cost</td>
 							<td>@Model[i].Status</td>
-							<td></td>
+							<td>@Model[i].User.Name</td>
 							<td>@Model[i].CreatedDateTime.ToString("d")</td>
 							<td>@Model[i].CreatedDateTime.ToString("t")</td>
 							<td>
@@ -36,7 +36,13 @@
 								asp-controller="Order"
 								asp-action="orderDetails"
 								asp-route-orderId="@Model[i].Id">Подробнее</a></td>
-							
+
+							<td>
+								<a class="btn btn-dark" asp-area="Admin"
+								   asp-controller="Order"
+								   asp-action="DeleateOrder"
+								   asp-route-orderId="@Model[i].Id">Удалить</a>
+							</td>
 						</tr>
 					}
 				</tbode>

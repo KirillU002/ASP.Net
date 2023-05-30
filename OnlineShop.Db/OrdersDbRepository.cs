@@ -42,5 +42,13 @@ namespace OnlineShop.Db
                 order.Status = newStatus;
             }
         }
+
+        public void DeleateOrder(Guid orderId)
+        {
+
+            var order = dataBaseContext.Orders.Include(x => x.Items).FirstOrDefault(x => x.Id == orderId);
+            dataBaseContext.Orders.Remove(order);
+            dataBaseContext.SaveChanges();
+        }
     }
 }

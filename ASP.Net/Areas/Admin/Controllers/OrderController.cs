@@ -35,5 +35,11 @@ namespace ASP.Net.Areas.Admin.Controllers
             ordersRepository.UpdateStatus(orderId, (OrderStatus)(int)status);
             return RedirectToAction(nameof(Index));
         }//3000
+
+        public ActionResult DeleateOrder(Guid orderId)
+        {
+			ordersRepository.DeleateOrder(orderId);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
