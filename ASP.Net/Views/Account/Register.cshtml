@@ -26,12 +26,33 @@
 			<span asp-validation-for="Password" />
 	</div>
 					<div class="input-group mb-3">
-						<span class="input-group-text" style="width: 270px">Повторите введеный пароль</span>
-			<input class="form-control" asp-for="ConfirmPassword" />
-			<span asp-validation-for="ConfirmPassword" />
+						<span class="input-group-text" 
+						style="width: 270px">Повторите введеный пароль</span>
+			<input class="form-control" 
+			asp-for="ConfirmPassword" />
+			<span 
+				asp-validation-for="ConfirmPassword" />
 		</div>
 
 <div>
-	<button class="btn btn-dark" type="submit" asp-controller="Account" asp-action="Register">Зарегистрироваться</button>
+	<button class="btn btn-dark" 
+	type="submit" 
+	asp-controller="Account" 
+	asp-action="Register">
+	Зарегистрироваться
+</button>
 </div>
+
+	<div class="input-group mb-3">
+		<span class="input-group-text" 
+		style="width: 270px">
+		У вас есть аккаунт?
+	</span>
+		<a class="btn btn-toolbar"
+		type="sumbit"
+		asp-controller="Account"
+		asp-action="Login">
+			Авторизоваться
+		</a>
+	</div>
 </form>
