@@ -12,12 +12,12 @@ namespace OnlineShop.Db
             this.dataBaseContext = dataBaseContext;
         }
 
-        public void Add(string userId, Product product)
+        public void Add(string userId, Product product, List<Image> image)
         {
-            var existingProduct = dataBaseContext.FavoriteProducts.FirstOrDefault(x => x.UserId == userId && x.Product.Id == product.Id);
+            var existingProduct = dataBaseContext.FavoriteProducts.Include(x => x.Image).FirstOrDefault(x => x.UserId == userId && x.Product.Id == product.Id);
             if(existingProduct == null)
             {
-                dataBaseContext.FavoriteProducts.Add(new FavoriteProduct { Product = product, UserId = userId });
+                dataBaseContext.FavoriteProducts.Add(new FavoriteProduct { Product = product, UserId = userId, Image = image });
                 dataBaseContext.SaveChanges();
             }
         }
@@ -33,6 +33,7 @@ namespace OnlineShop.Db
         {
             return dataBaseContext.FavoriteProducts.Where(x => x.UserId == userId)
                                             .Include(x => x.Product)
+                                            .Include(x => x.Image)
                                             .Select(x => x.Product)
                                             .ToList();
         }

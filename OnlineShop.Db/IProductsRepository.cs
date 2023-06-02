@@ -9,5 +9,7 @@ namespace OnlineShop.Db
         void Add(Product monitorsProduct);
         void Update(Product product);
         void Remove(Guid productId);
-    }
+        List<Image> GetImage(Guid productId);
+
+	}
 }

@@ -79,5 +79,11 @@ namespace OnlineShop.Db
 
             dataBaseContext.SaveChanges();
         }
+
+        public List<Image> GetImage(Guid productId)
+        {
+            var product = dataBaseContext.Products.Include(x => x.Image).FirstOrDefault(product => product.Id == productId);
+            return product.Image.ToList();
+		}
     }
 }

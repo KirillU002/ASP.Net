@@ -29,7 +29,7 @@ namespace ASP.Net.Controllers
         public IActionResult Add(Guid productId)
         {
             var product = productsRepository.TryGetById(productId);
-            favoriteRepository.Add(Constants.UserId, product);
+            favoriteRepository.Add(Constants.UserId, product, productsRepository.GetImage(productId));
             return RedirectToAction(nameof(Index));
         }
 

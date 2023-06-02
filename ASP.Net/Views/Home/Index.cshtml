@@ -43,7 +43,7 @@
             <a asp-controller="Product" asp-route-id="@Model[i].Id"><img class="card-img-top" src="@Model[i].ImagePath"></a>
             <div class="card-body">
                 <h4 class="card-title">
-                <a asp-controller="Product">@Model[i].Name</a>
+                        <a asp-controller="Product" asp-route-id="@Model[i].Id">@Model[i].Name</a>
                 </h4>
                 <h5>@Model[i].Cost &#8381;</h5>
                 <p class="card-text">@Model[i].Description</p>

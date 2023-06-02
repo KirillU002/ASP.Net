@@ -3,9 +3,9 @@
 <div class="row">
     @for (int i = 0; i < Model.Count; i++)
 {
-    <div class="col-3">
-            <div class="card h-100 box-shadow">
-               @* <a asp-controller="Product" asp-route-id="@Model[i].Id"><img class="card-img-top" src="@Model[i].ImagePath"></a>*@
+    <div class="col-4">
+            <div class="card h-150 box-shadow">
+                @*<a asp-controller="Product" asp-route-id="@Model[i].Id"><img class="card-img-top" src="@Model[i].ImagePath"></a>*@
 
            <div class="card-body">
                <a style="color:black"
@@ -15,14 +15,48 @@
                        asp-route-id="@Model[i].Id">
                         <h5>@Model[i].Name</h5>
                    </a>
-                    <h5>@Model[i].Cost руб</h5>
+                    <FONT size="12">
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width: 350px">@Model[i].Cost руб</span>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width: 350px">Компания: @Model[i].Company</span>
+                    </div>
+
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width: 350px">Диагональ: @Model[i].Diagonal</span>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width: 350px">Разрешение экрана: @Model[i].ScreenResolution</span>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width: 350px">Тип матрицы: @Model[i].Matrix</span>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width: 350px">Время отклика: @Model[i].Response</span>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width: 350px">Гц:@Model[i].Hz</span>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width: 350px">Цвет: @Model[i].Color</span>
+                    </div>
+                    </font>
                <a class="btn btn-dark"
                asp-area=""
                asp-controller="Cart"
                asp-action="Add"
                        asp-route-productId="@Model[i].Id"
                role="button">Добавить в корзину</a>
-
+               <h5></h5>
                     <a class="btn btn-danger"
                    asp-area=""
                    asp-controller="Favorite"

@@ -7,27 +7,46 @@
 
            <div class="col-5">
                <FONT size="12">
-                   <h5>@Model.Name</h5>
-                   
-               <h5>@Model.Cost руб</h5>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">@Model.Name</span>
+                </div>
 
-               <h5>Компания: @Model.Company </h5>
-               <br>
-               <h5>Диагональ: @Model.Diagonal </h5>
-               <br>
-               <h5>Разрешение экрана: @Model.ScreenResolution </h5>
-               <br>
-               <h5>Тип матрицы: @Model.Matrix </h5>
-               <br>
-               <h5>Время отклика: @Model.Response </h5>
-               <br>
-               <h5>Гц: @Model.Hz </h5>
-               <br>
-               <h5>Цвет: @Model.Color </h5></FONT>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">@Model.Cost руб</span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">Компания: @Model.Company</span>
+                </div>
+
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">Диагональ: @Model.Diagonal</span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">Разрешение экрана: @Model.ScreenResolution</span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">Тип матрицы: @Model.Matrix</span>
+                </div>
+               
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">Время отклика: @Model.Response</span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">Гц:@Model.Hz</span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">Цвет: @Model.Color</span>
+                </div>
 
                <a class="btn btn-dark" href="/home/index" role="button">Продолжить покупки</a>
                <a class="btn btn-dark" href="/cart/add?productId=@Model.Id" role="button">Добавить в корзину</a>
-
+               </Font>
                
            </div>
            

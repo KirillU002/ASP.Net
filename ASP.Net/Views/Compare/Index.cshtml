@@ -5,7 +5,7 @@
 {
     <div class="col-5">
         <div class="card shadow">
-            @*<img class="card-img-top" src="@product.ImagePath" alt="Изображение товара">*@
+                @*<img asp-controller="Product" asp-route-id="@product.Id"><img class="card-img-top" src="@product.ImagePath"></img>*@
 
            <div class="card-body">
                <a style="color:black"
@@ -15,20 +15,44 @@
                asp-route-id="@product.Id">
                    <h5>@product.Name</h5>
                    </a>
-                    <h5>Компания: @product.Company </h5>
-                    <br>
-                    <h5>Диагональ: @product.Diagonal </h5>
-                    <br>
-                    <h5>Разрешение экрана: @product.ScreenResolution </h5>
-                    <br>
-                    <h5>Тип матрицы: @product.Matrix </h5>
-                    <br>
-                    <h5>Время отклика: @product.Response </h5>
-                    <br>
-                    <h5>Гц: @product.Hz </h5>
-                    <br>
-                    <h5>Цвет: @product.Color </h5>
-                    <br>
+               <FONT size="12">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">@product.Name</span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">@product.Cost руб</span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">Компания: @product.Company</span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">Диагональ: @product.Diagonal</span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">Разрешение экрана: @product.ScreenResolution</span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">Тип матрицы: @product.Matrix</span>
+                </div>
+               
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">Время отклика: @product.Response</span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">Гц:@product.Hz</span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" style="width: 350px">Цвет: @product.Color</span>
+                </div>
+               </Font>
+
                <h5>@product.Cost руб</h5>
                <a class="btn btn-dark"
                asp-area=""
