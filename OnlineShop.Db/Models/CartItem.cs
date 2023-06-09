@@ -4,6 +4,6 @@
     {
         public Guid Id { get; set; }
         public Product Product { get; set; }
-        public int Amount { get; set; }//кол-во
+        public int Amount { get; set; }
     }
 }

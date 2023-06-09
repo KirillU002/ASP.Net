@@ -13,7 +13,6 @@ namespace ASP.Net.Areas.Admin.Controllers
 	[Authorize(Roles = OnlineShop.Db.Constants.AdminRoleName)]
 	public class UserController : Controller
     {
-        //private readonly IUsersManager usersManager;
         private readonly UserManager<User> usersManager;
         private readonly RoleManager<IdentityRole> rolesManager;
 
@@ -25,14 +24,12 @@ namespace ASP.Net.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            //var userAccount = usersManager.GetAll();
             var userAccount = usersManager.Users.ToList();
             return View(userAccount.Select(x => x.ToUserViewModel()).ToList());
         }
 
         public IActionResult Detail(string name)
         {
-            //var userAccount = usersManager.TryGetByName(name);
             var userAccount = usersManager.FindByNameAsync(name).Result;
             return View(userAccount.ToUserViewModel());
         }
@@ -64,34 +61,12 @@ namespace ASP.Net.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return RedirectToAction(nameof(ChangePassword));
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        usersManager.ChangePassword(changePassword.UserName, changePassword.Password);
-
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    else
-        //        return RedirectToAction(nameof(ChangePassword));
         }
         public IActionResult EditUser(string name)
         {
-                //var editUser = usersManager.TryGetByName(name);
                 var editUser = usersManager.FindByNameAsync(name).Result;
                 return View(editUser);
         }
-
-        //[HttpPost]
-        //public IActionResult EditUser(UserViewModel user)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(user);
-        //    }
-
-        //    usersManager.Update(user);
-        //    return RedirectToAction(nameof(Index));
-        //}
 
         public IActionResult Delete(string name)
         {

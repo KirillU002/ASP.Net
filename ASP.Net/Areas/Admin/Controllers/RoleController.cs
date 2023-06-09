@@ -11,7 +11,6 @@ namespace ASP.Net.Areas.Admin.Controllers
     [Authorize(Roles = OnlineShop.Db.Constants.AdminRoleName)]
     public class RoleController : Controller
     {
-        //private readonly IRolesRepository rolesRepository;
         private readonly RoleManager<IdentityRole> rolesManager;
 
         public RoleController(RoleManager<IdentityRole> rolesRepository)
@@ -57,16 +56,6 @@ namespace ASP.Net.Areas.Admin.Controllers
             }
 
             return View(role);
-            //if (rolesManager.TryGetByName(role.Name) != null)
-            //{
-            //    ModelState.AddModelError("", "Такая роль уже существует");
-            //}
-            //if (ModelState.IsValid)
-            //{
-            //    rolesManager.Add(role);
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //return View(role);
         }
     }
 }
