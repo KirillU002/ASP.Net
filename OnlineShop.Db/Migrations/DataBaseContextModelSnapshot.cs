@@ -112,9 +112,6 @@ namespace OnlineShop.Db.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("FavoriteProductId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
@@ -124,8 +121,6 @@ namespace OnlineShop.Db.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FavoriteProductId");
-
                     b.HasIndex("ProductId");
 
                     b.ToTable("Image");
@@ -133,13 +128,13 @@ namespace OnlineShop.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("93aca5ca-a2b0-4c52-a2cd-c29dbbad8949"),
+                            Id = new Guid("d41347da-a24e-4f32-ab43-9e8f7e15d567"),
                             ProductId = new Guid("48240a82-9f6b-414c-97f4-f624813149b2"),
                             Url = "/images/Products/image3.png"
                         },
                         new
                         {
-                            Id = new Guid("eeec8f03-a320-47ac-b97e-0af9cd17cb41"),
+                            Id = new Guid("52a68ece-f4e7-456f-b5b9-158efbd4d19a"),
                             ProductId = new Guid("befe6b5b-7171-4446-b35c-5b265b81be17"),
                             Url = "/images/Products/image4.jpg"
                         });
@@ -313,10 +308,6 @@ namespace OnlineShop.Db.Migrations
 
             modelBuilder.Entity("OnlineShop.Db.Models.Image", b =>
                 {
-                    b.HasOne("OnlineShop.Db.Models.FavoriteProduct", null)
-                        .WithMany("Image")
-                        .HasForeignKey("FavoriteProductId");
-
                     b.HasOne("OnlineShop.Db.Models.Product", "Product")
                         .WithMany("Image")
                         .HasForeignKey("ProductId")
@@ -340,11 +331,6 @@ namespace OnlineShop.Db.Migrations
             modelBuilder.Entity("OnlineShop.Db.Models.Cart", b =>
                 {
                     b.Navigation("Items");
-                });
-
-            modelBuilder.Entity("OnlineShop.Db.Models.FavoriteProduct", b =>
-                {
-                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("OnlineShop.Db.Models.Order", b =>
